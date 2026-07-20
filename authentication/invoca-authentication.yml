@@ -1,0 +1,47 @@
+generated: '2026-07-19'
+method: searched
+source: https://developers.invoca.net/en/latest/api_documentation/manage_api_credentials.html
+docs: https://developers.invoca.net/en/latest/basics/design_principles.html
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  - body
+  notes: >-
+    Invoca's self-serve API access is token-based and OAuth-compliant, but does
+    NOT use OAuth refresh tokens and exposes no OAuth scope surface. Tokens are
+    minted per-credential in the platform UI (Integrations > Manage Integrations
+    > Invoca APIs > + New API Credential). HTTP(S) Basic Authentication (username
+    + password) is also accepted, and session-login auth is available for browser
+    testing only.
+schemes:
+- name: InvocaAPIToken
+  type: apiKey
+  in: header
+  parameter: Authorization
+  format: 'Authorization: <token>'
+  description: >-
+    Recommended. Send the self-serve Invoca API token in the Authorization
+    request header. Tokens are long-lived (no refresh token) and must be treated
+    like passwords; never commit to source control.
+  sources:
+  - https://developers.invoca.net/en/latest/api_documentation/manage_api_credentials.html
+- name: InvocaAPITokenBody
+  type: apiKey
+  in: body
+  parameter: oauth_token
+  description: >-
+    Alternative for JSON POST requests: pass the token as an oauth_token
+    key/value pair in the JSON request body.
+  sources:
+  - https://developers.invoca.net/en/latest/api_documentation/manage_api_credentials.html
+- name: HTTPBasic
+  type: http
+  scheme: basic
+  description: >-
+    HTTP(S) Basic Authentication using a username and password in the request
+    header. Supported alongside API tokens on the transactions/network surface.
+  sources:
+  - https://developers.invoca.net/en/latest/basics/design_principles.html
