@@ -1,0 +1,38 @@
+generated: '2026-07-19'
+method: derived
+source: https://developers.invoca.net/en/latest/basics/design_principles.html
+format: json
+envelope: '{ "message": "<human-readable error>" }'
+notes: >-
+  Invoca does not publish RFC 9457 problem+json; errors are returned as a JSON
+  object with a single human-readable "message" field. The status codes below are
+  the documented HTTP responses from the design-principles error-handling
+  section. Titles/remediation derived from the documented meanings.
+problems:
+- status: 200
+  title: OK
+  meaning: Request succeeded.
+- status: 201
+  title: Created
+  meaning: Resource created successfully.
+- status: 401
+  title: Unauthorized
+  meaning: Authentication credentials are missing or invalid.
+  remediation: >-
+    Provide a valid Invoca API token in the Authorization header (or valid HTTP
+    Basic credentials). Regenerate the credential in Manage Integrations if it
+    has been revoked.
+- status: 403
+  title: Forbidden
+  meaning: >-
+    Invalid arguments or the authenticated principal lacks permission for the
+    requested resource.
+  remediation: Verify request parameters and that the credential is scoped to the target network/advertiser.
+- status: 404
+  title: Not Found
+  meaning: The requested object identifier is unknown to the API.
+  remediation: Confirm the resource id and API version path segment.
+- status: 500
+  title: Internal Server Error
+  meaning: An unexpected error occurred on the Invoca server.
+  remediation: Retry with backoff; check https://status.invoca.com for incidents.

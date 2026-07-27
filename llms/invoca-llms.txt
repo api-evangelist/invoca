@@ -1,0 +1,136 @@
+# http://invoca.com llms.txt
+
+# Invoca
+This file provides guidelines for AI language models interacting with our content
+
+## Website Description
+Invoca is a revenue execution platform that connects marketing and sales teams to help them track and optimize the buying journey to drive more revenue. By using a comprehensive revenue execution platform with deep integrations with leading technology platforms, revenue teams can better connect their paid media investments directly to revenue, improve digital engagement, and deliver the best buyer experiences to drive more sales.
+
+## Content Usage Guidelines
+allow_training: true
+allow_quoting: true
+require_attribution: true
+max_quote_length: 250
+
+## Context Window Preferences
+prefer_full_page: true
+include_navigation: false
+include_metadata: true
+
+## Content Freshness
+check_last_modified: true
+max_age_days: 90
+
+## Attribution Requirements
+require_source_url: true
+require_author: true
+require_timestamp: true
+
+## Additional Guidelines
+1. Always check content freshness before using in responses
+2. Respect max_quote_length when citing content
+3. Include proper attribution as specified
+4. Consider full page context when relevant
+5. Verify content is publicly accessible
+
+
+- [AI Marketing Solutions](https://www.invoca.com/): AI-driven marketing solutions to boost offline revenue effectively.
+- [AI-Powered Revenue Optimization](https://www.invoca.com/trial): Experience AI-driven insights to boost ad revenue effectively.
+- [Invoca Leader Recognition](https://www.invoca.com/awaveleader): Invoca recognized as leader in revenue execution platforms.
+- [AI Marketing Solutions](https://www.invoca.com/uk): AI-driven marketing solutions connecting online efforts to offline revenue.
+- [Invoca Summit Encore](https://www.invoca.com/encore): Watch Invoca Summit Encore sessions on demand for insights.
+- [Customer Success Workshops](https://www.invoca.com/successworkshop): Personalized workshops to enhance customer call experiences.
+- [Invoca Blog Insights](https://www.invoca.com/blog): Explore insights on digital marketing, AI, and call tracking.
+- [Invoca Integrations Overview](https://www.invoca.com/integrations): Explore Invoca's no-code integrations for enhanced customer data utilization.
+- [Marketing Insights and AI](https://www.invoca.com/posts): Explore expert insights on marketing strategies and AI tools.
+- [Invoca Call Tracking](https://www.invoca.com/g2): Invoca excels in inbound call tracking and customer support.
+- [Invoca Pricing Plans](https://www.invoca.com/pricing): Explore Invoca's pricing plans for call tracking solutions.
+- [eCommerce Solutions](https://www.invoca.com/solutions/ecommerce): Enhance eCommerce sales through insights and conversion strategies.
+- [Invoca Partner Program](https://www.invoca.com/resources/partnerships): Join Invoca's partner program to enhance business growth.
+- [Marketing Solutions Overview](https://www.invoca.com/solutions/marketing): Optimize marketing spend with call tracking and data insights.
+- [CallEngine Success Story](https://www.invoca.com/customers/callengine): CallEngine enhances call tracking and boosts revenue growth.
+- [Invoca and VinSolutions Integration](https://www.invoca.com/integrations/vinsolutions): Integrate Invoca with VinSolutions for enhanced lead tracking.
+- [Pinterest Ad Integration](https://www.invoca.com/integrations/pinterest): Integrate Pinterest ads for better call tracking and optimization.
+- [Invoca Customer Success Stories](https://www.invoca.com/uk/customers): Invoca helps businesses improve call performance and revenue growth.
+- [Telecommunications Insights](https://www.invoca.com/topic/telecommunications): Telecom companies enhance marketing with call tracking and analytics.
+- [Invoca and Impact Integration](https://www.invoca.com/integrations/impact): Automate partnership efforts with Invoca and Impact integration.
+- [Invoca and Auryc Integration](https://www.invoca.com/integrations/auryc): Integrate Invoca with Auryc for enhanced customer insights.
+- [Invoca Billing Terms](https://www.invoca.com/billing-terms): Detailed billing terms and conditions for Invoca services.
+- [Invoca and Contentsquare Integration](https://www.invoca.com/integrations/contentsquare): Enhance conversions and reduce cart abandonment with Invoca.
+- [Invoca Company Overview](https://www.invoca.com/company/about): Invoca connects marketing and sales teams to optimize revenue.
+- [Invoca Connex Integration](https://www.invoca.com/integrations/connex): Integrate Invoca's AI with Connex for media optimization.
+- [CTAMedia Integration](https://www.invoca.com/integrations/ctamedia): Innovative agency driving inbound calls through media optimization.
+- [Healthcare Marketing Insights](https://www.invoca.com/topic/healthcare): Explore how healthcare companies enhance marketing and patient care.
+- [Decibel Integration](https://www.invoca.com/integrations/decibel): Integrate Decibel's analytics with Invoca for enhanced insights.
+- [Invoca Privacy Policy](https://www.invoca.com/privacy-policy): Invoca's privacy policy details data collection, usage, and rights.
+- [Invoca and Optimizely Integration](https://www.invoca.com/integrations/optimizely): Integrate Invoca with Optimizely for enhanced marketing insights.
+- [Contact Invoca](https://www.invoca.com/company/contact): Contact Invoca for support, demos, and inquiries.
+- [Invoca Summit Awards](https://www.invoca.com/summit/awards): Invoca Summit Awards celebrate innovative customers and partners' achievements.
+- [Invoca TikTok Integration](https://www.invoca.com/integrations/tiktok): Optimize TikTok ad performance with Invoca's integration tools.
+- [Cost-Per-Click Reduction](https://www.invoca.com/customers/freshpaint): Healthcare provider reduces CPC by 50% using Invoca and Freshpaint.
+- [Invoca Slack Integration](https://www.invoca.com/integrations/slack): Integrate Invoca with Slack for real-time call alerts.
+- [Automotive Sales Solutions](https://www.invoca.com/demo/automotive): Boost automotive sales and service appointments with Invoca's AI.
+- [Invoca Leader in Revenue](https://www.invoca.com/uk/awaveleader): Invoca recognized as a leader in revenue execution platforms.
+- [Invoca Newsroom](https://www.invoca.com/uk/press): Explore Invoca's latest news, press releases, and awards.
+- [AI in Marketing](https://www.invoca.com/topic/ai): Explore how AI transforms marketing strategies and call tracking.
+- [Sproutloud Integration](https://www.invoca.com/integrations/sproutloud): Sproutloud integration enhances marketing automation and analytics.
+- [Telecom Customer Analytics](https://www.invoca.com/solutions/telecom): Invoca enhances telecom revenue through customer analytics and call tracking.
+- [Direct2Market Success](https://www.invoca.com/customers/direct2market): Direct2Market enhances pay-per-call campaigns with Invoca's analytics.
+- [Optimize Marketing Spend](https://www.invoca.com/demo/marketing): Maximize marketing effectiveness with complete conversion data insights.
+- [Call Tracking Insights](https://www.invoca.com/topic/general): Explore call tracking and analytics for better marketing strategies.
+- [Automotive Call Tracking](https://www.invoca.com/solutions/automotive): Invoca's automotive call tracking boosts leads and sales efficiency.
+- [Invoca HubSpot Integration](https://www.invoca.com/integrations/hubspot): Integrate Invoca with HubSpot for enhanced marketing insights.
+- [Retail Call Tracking Solutions](https://www.invoca.com/solutions/retail): Enhance retail conversions with call tracking and analytics.
+- [Invoca Reports and Resources](https://www.invoca.com/resources/reports): Explore comprehensive reports on AI and marketing strategies.
+- [Invoca and Skai Integration](https://www.invoca.com/integrations/skai): Integrate Invoca with Skai for optimized marketing campaigns.
+- [Invoca Call Tracking](https://www.invoca.com/uk/g2): Invoca excels in enterprise inbound call tracking solutions.
+- [Instagram Integration](https://www.invoca.com/integrations/instagram): Track calls and conversions from Instagram ads effectively.
+- [Invoca Facebook Integration](https://www.invoca.com/integrations/facebook): Optimize Facebook ads with Invoca's call attribution integration.
+- [Snapchat Call Tracking](https://www.invoca.com/integrations/snapchat): Track calls and conversions from Snapchat ads effectively.
+- [Invoca Blog Insights](https://www.invoca.com/uk/blog): Explore insights on digital marketing, AI, and customer experience.
+- [Invoca CAKE Integration](https://www.invoca.com/integrations/cake): Integrate Invoca with CAKE for marketing analytics.
+- [Tune Integration Overview](https://www.invoca.com/integrations/tune): Performance marketing and tracking software for digital campaigns.
+- [Marketing Infographics Resource](https://www.invoca.com/resources/infographics): Explore various infographics on marketing strategies and insights.
+- [Vivint's Marketing Success](https://www.invoca.com/customers/vivint): Vivint enhances marketing success with Invoca's data-driven insights.
+- [Customer Success Stories](https://www.invoca.com/customers): Explore Invoca's customer success stories and revenue growth strategies.
+- [Insurance Call Tracking](https://www.invoca.com/solutions/insurance): Invoca enhances insurance marketing with call tracking and analytics.
+- [Invoca for CJ Integration](https://www.invoca.com/integrations/cj): Discover how Invoca enhances CJ's Pay Per Call tracking.
+- [FullStory Integration Overview](https://www.invoca.com/integrations/fullstory): Discover how FullStory enhances user experience and conversions.
+- [Insurance Marketing Insights](https://www.invoca.com/topic/insurance): Explore how insurance companies enhance marketing with call tracking.
+- [Marketing eBooks and Insights](https://www.invoca.com/resources/ebooks): Explore various eBooks on marketing strategies and AI insights.
+- [Invoca Pricing Plans](https://www.invoca.com/uk/pricing): Explore Invoca's pricing plans for call tracking solutions.
+- [Invoca Careers](https://www.invoca.com/company/careers): Explore Invoca's inclusive culture and current job openings.
+- [Invoca Webinars on Marketing](https://www.invoca.com/resources/webinars): Explore Invoca's webinars on marketing strategies and AI insights.
+- [Invoca Integrations](https://www.invoca.com/uk/integrations): Explore Invoca's no-code integrations for enhanced customer data utilization.
+- [Invoca and Criteo Integration](https://www.invoca.com/integrations/criteo): Integrate Invoca with Criteo for optimized advertising campaigns.
+- [Invoca Basic Features](https://www.invoca.com/basic-platform-features): Explore Invoca's basic platform features for call tracking.
+- [Invoca Billing Policy](https://www.invoca.com/billing-policy): Detailed billing policy outlining charges and usage terms.
+- [Missing Phone Calls](https://www.invoca.com/blog/how-many-phone-calls-are-you-missing): Discover how many phone calls your business is missing.
+- [Missed Sales Calls Revenue](https://www.invoca.com/blog/how-to-turn-missed-sales-calls-into-revenue-opportunities): Learn how to convert missed sales calls into revenue.
+- [Cost of Missed Calls](https://www.invoca.com/blog/how-much-missed-sales-calls-cost-home-services-businesses): Missed sales calls significantly impact revenue for home services.
+- [Invoca Call Tracking Leader](https://www.invoca.com/blog/invoca-named-enterprise-call-tracking-leader-by-g2): Invoca recognized as top enterprise call tracking leader by G2.
+- [Summer 2020 Product Release](https://www.invoca.com/press-release/invoca-announces-summer-2020-product-release): Invoca's Summer 2020 release enhances call tracking features.
+- [Best Workplace Recognition](https://www.invoca.com/blog/invoca-named-inc-best-workplace-seventh-consecutive-year): Invoca recognized as a top workplace for seventh year.
+- [New Invoca Products](https://www.invoca.com/blog/announcing-new-invoca-products-for-a-new-era-of-consumers): Invoca announces new conversation intelligence solutions for revenue teams.
+- [Invoca's Leadership in AI](https://www.invoca.com/blog/invoca-named-leader-opus-conversational-intelligence-report): Invoca recognized as a leader in conversational intelligence report.
+- [Invoca Best Workplace Award](https://www.invoca.com/blog/invoca-named-an-inc-best-workplace-for-a-fourth-consecutive-year): Invoca recognized as a top workplace for four years straight.
+- [Invoca's Forrester Leadership](https://www.invoca.com/blog/invoca-named-leader-forrester-wave-conversation-intelligence-report): Invoca recognized as a leader in conversation intelligence solutions.
+- [Top SaaS CEO Award](https://www.invoca.com/blog/invocas-ceo-gregg-johnson-is-named-top-saas-ceo-by-the-software-report): Gregg Johnson recognized as a top SaaS CEO in 2019.
+- [Invoca and Tealium Partnership](https://www.invoca.com/blog/invoca-named-tealiums-first-strategic-partner-in-its-new-partner-program): Invoca partners with Tealium for enhanced customer data integration.
+- [Invoca Named Leader 2024](https://www.invoca.com/blog/invoca-named-a-leader-2024-opus-research-conversation-intelligence-report): Invoca recognized as a leader in conversation intelligence solutions.
+- [Invoca Press Releases](https://www.invoca.com/press): Explore Invoca's latest press releases, news, and awards.
+- [AI Signal Insights](https://www.invoca.com/product/signal-ai-studio): Unlock insights from conversations with AI-powered marketing solutions.
+- [Signal AI Discovery](https://www.invoca.com/product/signal-discovery): Discover customer insights through advanced conversation analytics.
+- [2022 Invoca Summit Awards](https://www.invoca.com/blog/the-2022-invoca-summit-awards-finalists-are): Celebrating the finalists of the 2022 Invoca Summit Awards.
+- [Invoca Conversation Intelligence](https://www.invoca.com/blog/invoca-opus-conversation-intelligence-report): Invoca recognized as leader in conversation intelligence solutions.
+- [Best Workplace for Parents](https://www.invoca.com/blog/why-invoca-is-a-best-workplace-for-parents): Invoca supports parents with flexible hours and empathy.
+- [AI for Contact Centers](https://www.invoca.com/solutions/contact-centers): Maximize contact center efficiency with AI-driven solutions.
+- [Invoca Elite Features](https://www.invoca.com/elite-platform-features): Comprehensive call tracking and management platform features.
+- [Home Services Solutions](https://www.invoca.com/solutions/home-services): Optimize home services marketing with call tracking solutions.
+- [Healthcare User Group](https://www.invoca.com/events/invoca-healthcare-customer-user-group-06-13): Join a virtual lunch & learn for healthcare marketers.
+- [PPC Optimization Checklist](https://www.invoca.com/blog/ppc-optimization-checklist): Essential checklist for optimizing your PPC advertising strategy.
+- [Invoca Call Tracking ROI](https://www.invoca.com/blog/the-roi-of-invoca-call-tracking-in-30-seconds): Discover how Invoca's call tracking boosts marketing ROI.
+- [Invoca Summit 2021 Winners](https://www.invoca.com/blog/congrats-invoca-summit-2021-award-winners): Celebrating the winners of Invoca Summit 2021 awards.
+- [Invoca Summit 2022 Winners](https://www.invoca.com/blog/congrats-invoca-summit-2022-award-winners): Celebrating the winners of Invoca Summit 2022 awards.
+- [Social Advertising Optimization](https://www.invoca.com/product/social-advertising): Optimize social advertising performance with AI-driven insights and integrations.
+- [PPC Optimization Software](https://www.invoca.com/product/media-optimization): Optimize PPC campaigns to reduce costs and increase revenue.

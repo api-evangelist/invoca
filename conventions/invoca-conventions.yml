@@ -1,0 +1,70 @@
+generated: '2026-07-19'
+method: searched
+source: https://developers.invoca.net/en/latest/basics/design_principles.html
+cross_links:
+  authentication: authentication/invoca-authentication.yml
+  errors: errors/invoca-problem-types.yml
+  lifecycle: lifecycle/invoca-lifecycle.yml
+authentication:
+  style: token
+  header: 'Authorization: <token>'
+  alternatives:
+  - HTTP Basic (username + password)
+  - oauth_token field in JSON body (POST)
+  refresh_tokens: false
+content_types:
+  request: application/json
+  response: application/json
+  legacy: >-
+    XML supported only on the 2013-03-22 version; JSON is standard from 2022-08-01
+    onward.
+versioning:
+  style: date-in-path
+  detail: See lifecycle/invoca-lifecycle.yml
+idempotency:
+  supported: true
+  style: design-level
+  key_header: null
+  description: >-
+    Per Invoca's design principles, "most interfaces are designed to be
+    idempotent, meaning that it is harmless to call them more than once with the
+    same parameters." Idempotency is a property of the interface design rather
+    than an Idempotency-Key request header; there is no client-supplied
+    idempotency key.
+  source: https://developers.invoca.net/en/latest/basics/design_principles.html
+pagination:
+  style: page-number
+  library: pagy
+  request_params:
+  - page
+  response_envelope: pagination
+  response_fields:
+  - page
+  - pages
+  - count
+  - items
+  - from
+  - to
+  - "in"
+  - next
+  - prev
+  - next_url
+  - prev_url
+  - first_url
+  - last_url
+  - page_url
+  notes: >-
+    List responses wrap results alongside a pagination object exposing the
+    current page, total pages/count, per-page item count, and prev/next/first/last
+    page URLs. (Pagination shape observed in the developer-portal Swagger UI
+    sample; page-number navigation via the page query parameter.)
+error_envelope:
+  format: json
+  shape: '{ "message": "<human-readable error>" }'
+  detail: See errors/invoca-problem-types.yml
+rate_limiting:
+  documented: false
+  notes: >-
+    No public rate-limit policy or rate-limit response headers are documented.
+    The Bulk Ringpool API is positioned as the high-request-per-second variant of
+    Ringpool for high-volume number allocation.

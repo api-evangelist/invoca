@@ -1,0 +1,35 @@
+generated: '2026-07-19'
+method: searched
+source: https://developers.invoca.net/en/latest/basics/design_principles.html
+versioning:
+  scheme: date-in-path
+  format: 'YYYY-MM-DD (e.g. 2019-02-01, 2022-08-01)'
+  location: url-path
+  current: '2026-02-01'
+  known_versions:
+  - '2013-03-22'
+  - '2016-08-22'
+  - '2017-04-01'
+  - '2019-02-01'
+  - '2019-05-01'
+  - '2022-08-01'
+  - '2026-02-01'
+  docs: https://developers.invoca.net/en/latest/basics/design_principles.html
+  notes: >-
+    The API version is given as a date in the request path. As of the 2022-08-01
+    version all new feature development uses JSON for both request and response;
+    the legacy 2013-03-22 version continues to support XML. Documentation is
+    published per version at developers.invoca.net/en/<version>/.
+deprecation:
+  policy: >-
+    Older date-versioned APIs are superseded rather than hard-removed; the legacy
+    Ringpool API is documented as deprecated in favor of the Bulk Ringpool API,
+    and the 2013-03-22 XML surface is retained for backward compatibility.
+  deprecated_apis:
+  - name: Ringpool API (legacy)
+    superseded_by: Bulk Ringpool API
+  sunset_header: unknown
+status_page: https://status.invoca.com
+sla:
+  url: https://status.invoca.com
+  notes: Component-level uptime and incident history published on the status page.

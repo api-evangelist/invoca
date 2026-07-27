@@ -1,0 +1,39 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: https://developers.invoca.net/en/latest/api_documentation/index.html
+notes: >-
+  Invoca publishes no official hosted/remote MCP server (checked docs, npm
+  @modelcontextprotocol, MCP registries — none found). The tool list below is a
+  CANDIDATE surface derived from the documented Invoca API products, one tool per
+  documented capability. No OpenAPI operationIds are published, so tools are
+  named from product capabilities rather than verified operationIds.
+server:
+  name: invoca
+  transport: http
+  url: null
+tools:
+- name: list_call_transactions
+  description: Read call transaction / attribution data (Transactions API).
+  source: https://developers.invoca.net/en/latest/api_documentation/transactions_api/index.html
+- name: report_signal
+  description: Report a signal that occurred on a specific call (Signal API).
+  source: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
+- name: ingest_call
+  description: Ingest an externally originated call for Invoca intelligence processing (Call Ingestion API).
+  source: https://developers.invoca.net/en/latest/api_documentation/call_ingestion_api/index.html
+- name: get_call_transcript
+  description: Retrieve transcript information for a call (Call API).
+  source: https://developers.invoca.net/en/latest/api_documentation/index.html
+- name: allocate_ringpool_number
+  description: Allocate a dynamic, trackable promo phone number from a RingPool (Bulk Ringpool API).
+  source: https://developers.invoca.net/en/latest/api_documentation/index.html
+- name: sync_network_data
+  description: Replicate/synchronize advertiser, publisher, and campaign data with partner platforms (Network Integration).
+  source: https://developers.invoca.net/en/latest/api_documentation/index.html
+- name: get_calls_in_progress
+  description: Retrieve pre-call PreSense insight for live/in-progress calls (Calls In Progress API).
+  source: https://developers.invoca.net/en/latest/api_documentation/index.html
+- name: report_conversion
+  description: Report completed order/conversion information (conversion_reporting).
+  source: https://developers.invoca.net/en/latest/api_documentation/index.html

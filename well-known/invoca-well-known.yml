@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: searched
+source: live probes of /.well-known/* on Invoca hosts
+notes: >-
+  No /.well-known/ discovery documents are published on Invoca's public hosts.
+  Absence recorded as valid data. A separate llms.txt IS published at
+  https://www.invoca.com/llms.txt (saved verbatim at llms/invoca-llms.txt).
+hosts:
+- host: https://www.invoca.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /llms.txt
+    status: 200
+    note: Not a /.well-known path; saved at llms/invoca-llms.txt
+- host: https://developers.invoca.net
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://api.invoca.net
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404

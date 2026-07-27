@@ -1,7 +1,28 @@
 aid: invoca
 name: Invoca
-description: 'Invoca is a company surfaced as a portfolio company of accel and added to the API Evangelist
-  network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  Invoca is an AI-powered revenue execution platform that connects marketing and
+  sales teams by tracking and analyzing inbound phone calls across the buying
+  journey. Its call tracking, conversation intelligence, and signal analytics
+  attribute phone conversations back to the paid media, campaigns, and digital
+  touchpoints that drove them, so revenue teams can optimize ad spend and improve
+  buyer experiences. For developers, Invoca publishes a REST developer platform
+  (developers.invoca.net) with date-versioned APIs covering call transactions,
+  signals, call ingestion, RingPool number allocation, network integration, and
+  pre-call insight, authenticated with self-serve Invoca API tokens or HTTP Basic.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.invoca.com/favicon.ico
 url: https://raw.githubusercontent.com/api-evangelist/invoca/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,11 +32,40 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Ai
-apis: []
+- Call Tracking
+- Conversation Intelligence
+- Marketing
+- Attribution
+- Revenue
+- Telephony
+- Analytics
+apis:
+- name: Invoca API
+  description: >-
+    Invoca's date-versioned REST developer platform covering call transactions,
+    signal reporting, call ingestion, RingPool trackable-number allocation,
+    network integration, and pre-call (PreSense) insight. Version is specified as
+    a date in the URL path; JSON is the format for all development since the
+    2022-08-01 version. Authenticated with self-serve Invoca API tokens or HTTP
+    Basic auth.
+  humanURL: https://developers.invoca.net/en/latest/api_documentation/index.html
+  baseURL: https://invoca.net
+  tags:
+  - Call Tracking
+  - Conversation Intelligence
+  - Telephony
+  - Attribution
+  properties:
+  - type: Documentation
+    url: https://developers.invoca.net/en/latest/api_documentation/index.html
+  - type: APIReference
+    url: https://developers.invoca.net/en/latest/api_documentation/index.html
+  - type: SignalAPI
+    url: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -24,3 +74,58 @@ maintainers:
 common:
 - type: Website
   url: http://www.invoca.com
+- type: DeveloperPortal
+  url: https://developers.invoca.net/en/latest/
+- type: Documentation
+  url: https://developers.invoca.net/en/latest/
+- type: APIReference
+  url: https://developers.invoca.net/en/latest/api_documentation/index.html
+- type: GettingStarted
+  url: https://developers.invoca.net/en/latest/basics/index.html
+- type: Support
+  url: https://community.invoca.com/
+- type: Blog
+  url: https://www.invoca.com/blog
+- type: GitHubOrganization
+  url: https://github.com/Invoca
+- type: Pricing
+  url: https://www.invoca.com/pricing
+- type: SignUp
+  url: https://www.invoca.com/trial
+- type: TermsOfService
+  url: https://www.invoca.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.invoca.com/privacy-policy
+- type: StatusPage
+  url: https://status.invoca.com
+- type: TrustCenter
+  url: https://trust.invoca.com
+- type: Compliance
+  url: https://www.invoca.com/product/security-compliance
+- type: Authentication
+  url: authentication/invoca-authentication.yml
+- type: Conventions
+  url: conventions/invoca-conventions.yml
+- type: Idempotency
+  url: conventions/invoca-conventions.yml
+- type: Lifecycle
+  url: lifecycle/invoca-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/invoca-lifecycle.yml
+- type: Conformance
+  url: conformance/invoca-conformance.yml
+- type: ErrorCatalog
+  url: errors/invoca-problem-types.yml
+- type: MCPServer
+  url: mcp/invoca-mcp.yml
+- type: WellKnown
+  url: well-known/invoca-well-known.yml
+- type: DomainSecurity
+  url: security/invoca-domain-security.yml
+- type: LLMsTxt
+  url: llms/invoca-llms.txt
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

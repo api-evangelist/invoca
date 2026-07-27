@@ -1,0 +1,47 @@
+generated: '2026-07-19'
+method: derived
+source: https://developers.invoca.net/en/latest/basics/design_principles.html
+notes: >-
+  Standards conformance derived from the Invoca developer design principles and
+  the public security/compliance posture. Invoca's token auth is described as
+  "OAuth-compliant" but exposes no OAuth authorization-code flow or scope surface
+  and uses no refresh tokens, so it is not asserted as a full OAuth 2.0 provider.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: >-
+    Token access is described as OAuth-compliant but there is no documented
+    authorization/token endpoint, grant flow, or scope map; tokens are minted in
+    the UI and sent in the Authorization header. Treated as bearer-token auth.
+- id: http-basic-auth
+  conforms: true
+  evidence: HTTP(S) Basic Authentication documented in design principles.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use a plain '{ "message": ... }' JSON envelope, not
+    application/problem+json.
+- id: rest-json
+  conforms: true
+  evidence: JSON request/response standard from the 2022-08-01 API version onward.
+- id: date-based-versioning
+  conforms: true
+  evidence: API version supplied as a date in the URL path.
+- id: soc2-type2
+  conforms: true
+  evidence: SOC 2 Type 2 stated on invoca.com/product/security-compliance.
+- id: iso-27001
+  conforms: true
+  evidence: ISO 27001 stated on invoca.com/product/security-compliance.
+- id: pci-dss
+  conforms: true
+  evidence: PCI DSS stated on invoca.com/product/security-compliance.
+- id: hipaa
+  conforms: true
+  evidence: HIPAA compliance and BAA support stated on invoca.com/product/security-compliance.
+- id: gdpr
+  conforms: true
+  evidence: GDPR stated on invoca.com/product/security-compliance.
+- id: ccpa
+  conforms: true
+  evidence: CCPA stated on invoca.com/product/security-compliance.

@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: searched
+probe: false
+url: https://trust.invoca.com
+source: https://www.invoca.com/product/security-compliance
+certifications:
+- SOC 2 Type 2
+- ISO 27001
+- PCI DSS
+- HIPAA
+- GDPR
+- CCPA
+- FSQS
+- TRUSTe
+practices:
+- Independent auditors examine Invoca annually for security, availability, processing integrity, confidentiality, and privacy.
+- Regular security audits and web application penetration tests (twice yearly).
+- Business Associate Agreement (BAA) support for HIPAA-covered organizations.
+evidence:
+- source: https://www.invoca.com/product/security-compliance
+  keywords: [soc 2 type 2, iso 27001, pci dss, hipaa, gdpr, ccpa, penetration test]
+- source: https://trust.invoca.com
+  note: SafeBase-style trust center (JS-rendered); certifications confirmed via the public security-compliance page.
