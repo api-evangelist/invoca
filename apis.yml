@@ -32,7 +32,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-13'
 tags:
 - Company
 - Ai
@@ -66,6 +66,12 @@ apis:
     url: https://developers.invoca.net/en/latest/api_documentation/index.html
   - type: SignalAPI
     url: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
+  - type: OpenAPI
+    name: Invoca SMS Messaging API (OpenAPI 3.0.3, 2022-08-01)
+    url: openapi/invoca-sms-messaging-openapi.json
+  - type: Overlay
+    name: API Evangelist enhancements for the Invoca SMS Messaging API
+    url: overlays/invoca-sms-messaging-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -118,14 +124,36 @@ common:
   url: errors/invoca-problem-types.yml
 - type: MCPServer
   url: mcp/invoca-mcp.yml
-- type: WellKnown
-  url: well-known/invoca-well-known.yml
 - type: DomainSecurity
   url: security/invoca-domain-security.yml
 - type: LLMsTxt
   url: llms/invoca-llms.txt
+- type: ChangeLog
+  url: https://www.invoca.com/latest-releases
+- type: ChangeLog
+  name: Invoca product release feed (structured)
+  url: changelog/invoca-changelog.yml
+- type: Packages
+  url: packages/invoca-packages.yml
+- type: Plans
+  url: plans/invoca-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/invoca-rate-limits.yml
+- type: Components
+  url: components/invoca-components.yml
+- type: Sandbox
+  url: sandbox/invoca-sandbox.yml
+- type: DataModel
+  url: data-model/invoca-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 13
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Contract discovery found a real OpenAPI 3.0.3 (SMS Messaging API, 2022-08-01, 12
+    operations) embedded inline in the developer portal's Swagger UI initializer. Removed the
+    WellKnown pointer — every /.well-known path 404s and trust.invoca.com answers 200 with an
+    SPA shell.
