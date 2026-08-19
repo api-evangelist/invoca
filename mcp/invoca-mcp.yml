@@ -1,39 +1,90 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: derived
 status: candidate
 source: https://developers.invoca.net/en/latest/api_documentation/index.html
+checked: '2026-08-13'
 notes: >-
-  Invoca publishes no official hosted/remote MCP server (checked docs, npm
-  @modelcontextprotocol, MCP registries — none found). The tool list below is a
-  CANDIDATE surface derived from the documented Invoca API products, one tool per
-  documented capability. No OpenAPI operationIds are published, so tools are
-  named from product capabilities rather than verified operationIds.
+  Invoca publishes NO official hosted or remote MCP server. Re-checked 2026-08-13 against the
+  developer portal, the marketing site, npm (@modelcontextprotocol and vendor namespaces),
+  PyPI, the Invoca GitHub organization (180 public repos) and the public MCP registries —
+  nothing. The tool list below is a CANDIDATE surface derived from Invoca's documented API
+  products; it is not an Invoca claim and must not be read as one.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: derived
+  tools: 8
+  checked: '2026-08-13'
+  source: >-
+    Derived. No provider-published server exists to probe, so no endpoint has been recorded
+    and none has been guessed.
 server:
   name: invoca
   transport: http
   url: null
+watch:
+  finding: >-
+    Invoca is standing up a Mintlify-powered documentation site — the public repository
+    github.com/Invoca/docs describes itself as the "Mintlify-powered documentation site for
+    Invoca's Support and Developer Portal" (last pushed 2026-06-01) and its docs.json
+    enables Mintlify's `contextual` options including "mcp". Mintlify auto-provisions an MCP
+    endpoint and an llms.txt for a published site, so this is the most likely origin of a
+    first real Invoca MCP server.
+  status: not-live
+  evidence:
+  - url: https://raw.githubusercontent.com/Invoca/docs/main/docs.json
+    status: 200
+    note: '`"contextual": {"options": ["copy","view","chatgpt","claude","perplexity","mcp","cursor","vscode"]}`'
+  - url: https://docs.invoca.com/
+    status: 0
+    note: does not resolve
+  - url: https://invoca.mintlify.app/mcp
+    status: 200
+    note: >-
+      The Mintlify preview deployment IS answering MCP JSON-RPC, but it is still the
+      un-customised Mint Starter Kit — tools/list returns `search_mint_starter_kit` and
+      llms.txt reads "# Mint Starter Kit". It carries no Invoca content and sits on a
+      Mintlify-controlled domain, so it is NOT recorded as an Invoca MCP surface and no
+      MCPServer pointer is wired to it.
+  - url: https://support.invoca.com/llms.txt
+    status: 401
 tools:
 - name: list_call_transactions
   description: Read call transaction / attribution data (Transactions API).
   source: https://developers.invoca.net/en/latest/api_documentation/transactions_api/index.html
+  rest: 'GET https://invoca.net/api/2018-02-01/transactions.json'
 - name: report_signal
-  description: Report a signal that occurred on a specific call (Signal API).
+  description: Apply Signals and/or Custom Data Fields to a specific call after it has occurred (Signal API).
   source: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
 - name: ingest_call
   description: Ingest an externally originated call for Invoca intelligence processing (Call Ingestion API).
   source: https://developers.invoca.net/en/latest/api_documentation/call_ingestion_api/index.html
+  rest: 'POST https://invoca.net/api/2022-03-01/calls.json'
 - name: get_call_transcript
-  description: Retrieve transcript information for a call (Call API).
-  source: https://developers.invoca.net/en/latest/api_documentation/index.html
+  description: Retrieve transcript and transcript analysis for a call (Call API).
+  source: https://developers.invoca.net/en/latest/api_documentation/call_api/index.html
 - name: allocate_ringpool_number
   description: Allocate a dynamic, trackable promo phone number from a RingPool (Bulk Ringpool API).
-  source: https://developers.invoca.net/en/latest/api_documentation/index.html
+  source: https://developers.invoca.net/en/latest/api_documentation/bulk_ringpool_api.html
+  rest: 'POST https://pnapi.invoca.net/api/2013-07-01/bulk.json'
 - name: sync_network_data
-  description: Replicate/synchronize advertiser, publisher, and campaign data with partner platforms (Network Integration).
-  source: https://developers.invoca.net/en/latest/api_documentation/index.html
+  description: >-
+    Replicate advertiser, publisher, campaign, RingPool and promo-number data with partner
+    platforms (Network Integration).
+  source: https://developers.invoca.net/en/latest/api_documentation/network_integration/index.html
 - name: get_calls_in_progress
-  description: Retrieve pre-call PreSense insight for live/in-progress calls (Calls In Progress API).
-  source: https://developers.invoca.net/en/latest/api_documentation/index.html
-- name: report_conversion
-  description: Report completed order/conversion information (conversion_reporting).
-  source: https://developers.invoca.net/en/latest/api_documentation/index.html
+  description: Retrieve pre-call PreSense insight for live / in-progress calls (Calls In Progress API).
+  source: https://developers.invoca.net/en/latest/api_documentation/calls_in_progress_api/index.html
+  rest: 'GET https://invoca.net/api/2022-08-01/calls_in_progress/current_calls.json'
+- name: send_sms_message
+  description: Send an SMS message and read message / delivery-report state (SMS Messaging API).
+  source: openapi/invoca-sms-messaging-openapi.json
+  rest: 'POST /messages'
+  note: >-
+    The only candidate tool backed by a machine-readable schema — the harvested SMS Messaging
+    OpenAPI supplies a real request body (components/schemas/MessageRequest) and real
+    response shapes. Every other tool above would need its input schema written by hand from
+    prose.

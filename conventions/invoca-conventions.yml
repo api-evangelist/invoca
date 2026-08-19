@@ -1,10 +1,13 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
 source: https://developers.invoca.net/en/latest/basics/design_principles.html
 cross_links:
   authentication: authentication/invoca-authentication.yml
   errors: errors/invoca-problem-types.yml
   lifecycle: lifecycle/invoca-lifecycle.yml
+  rate_limits: rate-limits/invoca-rate-limits.yml
+  data_model: data-model/invoca-data-model.yml
+  openapi: openapi/invoca-sms-messaging-openapi.json
 authentication:
   style: token
   header: 'Authorization: <token>'
@@ -23,7 +26,7 @@ versioning:
   detail: See lifecycle/invoca-lifecycle.yml
 idempotency:
   supported: true
-  style: design-level
+  style: natural-key
   key_header: null
   description: >-
     Per Invoca's design principles, "most interfaces are designed to be
@@ -32,6 +35,35 @@ idempotency:
     than an Idempotency-Key request header; there is no client-supplied
     idempotency key.
   source: https://developers.invoca.net/en/latest/basics/design_principles.html
+  natural_keys:
+  - resource: Signal
+    surface: Signal API
+    key: [name, partner_unique_id]
+    semantics: >-
+      A Signal is unique on the combination of `name` and `partner_unique_id` within a
+      transaction. Re-posting an identical request is a no-op — the signal is neither
+      duplicated nor updated. Re-posting with the same key but different field values
+      UPDATES the original signal. Changing `partner_unique_id` creates a second signal of
+      the same name against the same transaction. Invoca states plainly: "It is safe then to
+      re-post API requests without fear of duplicate data."
+    source: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
+  self_correction:
+    supported: true
+    field: corrects_transaction_id
+    description: >-
+      An update does not mutate the original record in place. Invoca writes a NEW record with
+      a new `transaction_id` whose `corrects_transaction_id` points at the record it
+      supersedes, leaving an auditable correction chain. This is Invoca's documented
+      "Self-Correction" design principle and is what makes replay safe.
+    source: https://developers.invoca.net/en/latest/basics/design_principles.html
+  retry_guidance: >-
+    Safe to retry Signal API writes with the same natural key. Call Ingestion documents a
+    "Retrying Failed Calls" process, but the developer portal states only "Details on this
+    process coming soon" — that guidance is not published.
+  gaps:
+  - No Idempotency-Key request header on any surface.
+  - No idempotency retention window is documented.
+  - Natural-key idempotency is documented for the Signal API only; the other surfaces rest on the general design-principles statement.
 pagination:
   style: page-number
   library: pagy
@@ -60,8 +92,39 @@ pagination:
     sample; page-number navigation via the page query parameter.)
 error_envelope:
   format: json
-  shape: '{ "message": "<human-readable error>" }'
+  shapes:
+  - '{ "errors": { "class": "<ExceptionClass>", "invalid_data": "<detail>" } }   # REST platform'
+  - '{ "errors": { "<field>": ["<message>"] } }                                   # validation failure, 403'
+  - '{ "message": "<human-readable error>" }                                      # SMS Messaging API'
+  note: >-
+    Two incompatible envelopes are live at the same time and Invoca does not document which
+    surface returns which. 403 Forbidden is used for input validation as well as
+    authorization.
   detail: See errors/invoca-problem-types.yml
+
+base_urls:
+  form: 'https://invoca.net/api/<YYYY-MM-DD>/<resource>.json'
+  vanity_subdomain: >-
+    Invoca documents a "Dedicated Subdomain" principle; requests may also be made against
+    https://<vanity>.invoca.net/api/<version>/... and, for the legacy Ringpool API, against
+    https://<NETWORK>.invoca.net/api/<version>/...
+  observed:
+  - {surface: Transactions API, url: 'https://invoca.net/api/2018-02-01/transactions.json'}
+  - {surface: Call Ingestion API, url: 'https://invoca.net/api/2022-03-01/calls.json'}
+  - {surface: Calls In Progress API, url: 'https://invoca.net/api/2022-08-01/calls_in_progress/current_calls.json'}
+  - {surface: Bulk Ringpool API, url: 'https://pnapi.invoca.net/api/2013-07-01/bulk.json'}
+  - {surface: Ringpool API (Legacy), url: 'https://invoca.net/api/2015-12-09/ring_pools/{id}/allocate_number.xml'}
+  - {surface: SMS Messaging API, url: null, note: 'servers[] is empty in the harvested spec; paths are prefixed /sms/<version>/ but no host is published.'}
+  legacy_domain: >-
+    Previous web-integration installations referencing ringrevenue.com remain valid alongside
+    invoca.net.
+
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation header is documented. The only cross-reference Invoca
+    provides is the error handle returned in the body of a 500 response
+    (errors.invalid_data = "refer to error handle <n>").
 rate_limiting:
   documented: false
   notes: >-

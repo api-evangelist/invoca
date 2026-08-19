@@ -1,38 +1,129 @@
-generated: '2026-07-19'
-method: derived
-source: https://developers.invoca.net/en/latest/basics/design_principles.html
+generated: '2026-08-13'
+method: searched
+source: https://developers.invoca.net/en/latest/basics/error_handling.html
+docs:
+- https://developers.invoca.net/en/latest/basics/design_principles.html
+- https://developers.invoca.net/en/latest/basics/error_handling.html
+- https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
+- https://developers.invoca.net/en/latest/api_documentation/calls_in_progress_api/index.html
+- openapi/invoca-sms-messaging-openapi.json
 format: json
-envelope: '{ "message": "<human-readable error>" }'
+rfc9457: false
 notes: >-
-  Invoca does not publish RFC 9457 problem+json; errors are returned as a JSON
-  object with a single human-readable "message" field. The status codes below are
-  the documented HTTP responses from the design-principles error-handling
-  section. Titles/remediation derived from the documented meanings.
+  Invoca does not publish RFC 9457 problem+json. There are TWO distinct error envelopes in
+  production at the same time, which is itself the finding for an integrator: the REST
+  platform (Signal, Ringpool, Network Integration) returns an `errors` OBJECT keyed by
+  `class` and `invalid_data` — or, on validation failure, keyed by field name with an array
+  of messages — while the SMS Messaging API returns a flat single-key `{"message": "..."}`
+  object. There is no error `type` URI, no error code registry, and no machine-readable
+  catalogue. Status-code semantics also deviate from HTTP convention: 403 Forbidden is used
+  for invalid input and validation failure, not only for authorization.
+envelopes:
+- id: platform-errors-object
+  surfaces: [Signal API, Ringpool API, Bulk Ringpool API, Network Integration]
+  shape: '{ "errors": { "class": "<ExceptionClass>", "invalid_data": "<human-readable detail>" } }'
+  example: '{ "errors": { "class": "InvalidInput", "invalid_data": "transaction_id, call_record_id, external_call_unique_id, or call_start_time must not be empty" } }'
+  classes_observed:
+  - RecordNotFound
+  - InvalidInput
+  - InternalServiceError
+  source: https://developers.invoca.net/en/latest/basics/error_handling.html
+- id: platform-validation-object
+  surfaces: [Ringpool API, Network Integration]
+  shape: '{ "errors": { "<field_name>": ["<message>", ...], ... } }'
+  example: '{ "errors": { "pool_type": ["can''t be blank"], "destination_type": ["can''t be blank"], "name": ["can''t be blank"] } }'
+  note: >-
+    Returned on 403. Invoca states it will "do our best to package all of the issues together
+    in one response message", so multiple field failures arrive in a single body.
+  source: https://developers.invoca.net/en/latest/basics/error_handling.html
+- id: sms-message-string
+  surfaces: [SMS Messaging API]
+  shape: '{ "message": "<human-readable error>" }'
+  example: '{ "message": "Not Found - The request could not be completed due to the requested object identifier being unknown to SMS Messaging." }'
+  source: openapi/invoca-sms-messaging-openapi.json
 problems:
 - status: 200
   title: OK
-  meaning: Request succeeded.
+  meaning: Request succeeded. On the Signal API, all Signals and Custom Data were applied.
 - status: 201
   title: Created
-  meaning: Resource created successfully.
-- status: 401
-  title: Unauthorized
-  meaning: Authentication credentials are missing or invalid.
+  meaning: >-
+    Resource created. On the Signal API this specifically indicates the request was accepted
+    with the `call_in_progress` parameter set to true.
+- status: 202
+  title: Accepted
+  meaning: SMS Messaging accepted the message for delivery and forwarded it downstream.
+  source: 'openapi/invoca-sms-messaging-openapi.json#/paths/~1messages/post'
+- status: 204
+  title: No Content
+  source: 'openapi/invoca-sms-messaging-openapi.json#/paths/~1phone_numbers~1{phone_number}/post'
+- status: 400
+  title: Bad Request
+  meaning: >-
+    An invalid API version was used for the route (the date segment in the path does not
+    support that endpoint), or the JSON body could not be parsed.
+  envelope: sms-message-string
+  example_message: Problems parsing JSON
   remediation: >-
-    Provide a valid Invoca API token in the Authorization header (or valid HTTP
-    Basic credentials). Regenerate the credential in Manage Integrations if it
-    has been revoked.
+    Check the date version segment against
+    https://developers.invoca.net/en/latest/basics/design_principles.html and validate the
+    JSON body. The error message names the correction to make.
+- status: 401
+  title: Unauthorized / Not Authorized
+  meaning: Invalid or missing oauth token.
+  remediation: >-
+    Supply a valid Invoca API token in the Authorization header, as the oauth_token query
+    parameter on GET, or as the oauth_token key in the JSON body on POST. Regenerate the
+    credential under Integrations > Manage Integrations > Invoca APIs if it has been revoked.
 - status: 403
   title: Forbidden
   meaning: >-
-    Invalid arguments or the authenticated principal lacks permission for the
-    requested resource.
-  remediation: Verify request parameters and that the credential is scoped to the target network/advertiser.
+    Overloaded. Used for (a) genuine authorization failure, (b) invalid input, and (c) field
+    validation failure. Check the `errors` object to tell them apart: `class: InvalidInput`
+    is an input problem, a field-keyed body is a validation problem.
+  envelope: platform-errors-object / platform-validation-object
+  remediation: >-
+    Read `errors.invalid_data` or the per-field arrays. Verify the credential is scoped to
+    the target network/advertiser before assuming a permission problem.
 - status: 404
   title: Not Found
-  meaning: The requested object identifier is unknown to the API.
-  remediation: Confirm the resource id and API version path segment.
+  meaning: >-
+    The requested object identifier is unknown. On the Signal API this also covers the case
+    where a call_start_time plus search filters matched no call.
+  envelope: platform-errors-object
+  example_class: RecordNotFound
+  example_message: Could not find RingPool 123 for advertiser campaign 100 and advertiser 1
+  remediation: Confirm the resource id and the API version path segment.
+- status: 409
+  title: Conflict
+  meaning: >-
+    The request conflicts with the current state of the resource — for example re-adding a
+    phone number that already exists on SMS Messaging.
+  envelope: sms-message-string
+  source: openapi/invoca-sms-messaging-openapi.json
+- status: 422
+  title: Unprocessable Entity
+  meaning: >-
+    The supplied value is not valid for the resource — for example a malformed phone number,
+    or a sort column the endpoint does not support.
+  envelope: sms-message-string
+  example_message: "The request contains unsupported sort columns: 'destination'. Supported columns: 'created_at, progress_bit'"
+  source: openapi/invoca-sms-messaging-openapi.json
 - status: 500
   title: Internal Server Error
   meaning: An unexpected error occurred on the Invoca server.
-  remediation: Retry with backoff; check https://status.invoca.com for incidents.
+  envelope: platform-errors-object
+  example_class: InternalServiceError
+  example_message: refer to error handle 1228118400
+  remediation: >-
+    Invoca returns a unique error handle in `errors.invalid_data`. Quote that handle to
+    Invoca support as a cross-reference. Retry with backoff and check
+    https://status.invoca.com for incidents.
+gaps:
+- No error type URIs and no stable machine-readable error codes — errors are identified by an exception class name and English prose.
+- Two incompatible envelopes across the platform, with no documentation of which surface returns which.
+- 403 is used for input validation, so an integrator cannot distinguish authorization failure from bad data by status code alone.
+related:
+  conventions: conventions/invoca-conventions.yml
+  authentication: authentication/invoca-authentication.yml
+  lifecycle: lifecycle/invoca-lifecycle.yml

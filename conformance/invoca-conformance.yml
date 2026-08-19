@@ -1,4 +1,4 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: derived
 source: https://developers.invoca.net/en/latest/basics/design_principles.html
 notes: >-
@@ -45,3 +45,52 @@ standards:
 - id: ccpa
   conforms: true
   evidence: CCPA stated on invoca.com/product/security-compliance.
+- id: openapi-3.0
+  conforms: true
+  evidence: >-
+    Invoca publishes one OpenAPI 3.0.3 document — the SMS Messaging API, info.version
+    2022-08-01, 8 paths / 12 operations — embedded inline in the developer portal's Swagger
+    UI initializer at
+    https://developers.invoca.net/en/latest/_static/js/swagger-ui/swagger-initializer.js
+    Harvested verbatim to openapi/invoca-sms-messaging-openapi.json. It is the only
+    machine-readable contract Invoca publishes; the attribution core (Transactions, Signal,
+    Call Ingestion, Calls In Progress, Network Integration, Ringpool) is prose only.
+- id: openapi-servers-declared
+  conforms: false
+  evidence: servers[] is an empty array in the published document and no SMS Messaging base URL is documented anywhere.
+- id: openapi-security-declared
+  conforms: false
+  evidence: >-
+    The published document declares no securitySchemes and applies no security, although
+    every Invoca API requires a credential.
+- id: openapi-operationids
+  conforms: false
+  evidence: No operation in the published document carries an operationId.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation response header is documented; deprecation is announced in prose only.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    No /.well-known/security.txt on any Invoca host (probed 2026-08-13). trust.invoca.com
+    answers 200 with an SPA shell for every /.well-known path; those are not documents.
+- id: oidc-discovery
+  conforms: false
+  evidence: No /.well-known/openid-configuration on any Invoca host, despite SAML SSO being offered for platform login.
+- id: rate-limit-headers
+  conforms: false
+  evidence: No RateLimit-*/X-RateLimit-*/Retry-After headers are documented and no limits are published.
+- id: llmstxt
+  conforms: true
+  evidence: https://www.invoca.com/llms.txt returns 200; saved verbatim at llms/invoca-llms.txt.
+- id: a2a-agent-card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json both 404 on www.invoca.com,
+    invoca.com, invoca.net, api.invoca.net and developers.invoca.net (probed 2026-08-13).
+- id: saml-2.0
+  conforms: true
+  evidence: >-
+    SAML single sign-on documented at
+    https://developers.invoca.net/en/latest/basics/saml_single_sign_on.html; listed as an
+    Enterprise-tier and above entitlement on the pricing page.

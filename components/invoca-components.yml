@@ -1,0 +1,130 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.invoca.net/en/latest/web_integration/index.html
+fetched: '2026-08-13'
+summary: >-
+  Invoca's client-side surface is a browser tag that performs dynamic number insertion —
+  swapping the phone number rendered on a landing page for a campaign-specific tracking
+  ("promo") number so the resulting call can be attributed back to the session and the paid
+  media that drove it. It is not a UI component library in the widget sense; it is a
+  behaviour-injecting tag plus a small public JavaScript helper API (`Invoca.Tools.*`). The
+  loader snippet is generated per account inside the platform and is not distributed through
+  any package registry or public pinned CDN URL.
+distribution:
+  registry: none
+  pinned: false
+  note: >-
+    Code is obtained from the Invoca platform UI (Advertiser Home > Tools gear > Web
+    Integration > "Get Code" tab) and pasted into the page footer above </body>. Because
+    there is no public, versioned artifact, a consumer cannot determine which build they are
+    being served. See packages/invoca-packages.yml.
+families:
+- name: Invoca Tags
+  level: network
+  audience: Brands / networks
+  docs: https://developers.invoca.net/en/latest/web_integration/invoca_tags.html
+  description: >-
+    Network-level (brand) web integration tags. Installation instructions are delegated to
+    the Invoca support knowledge base, which is authentication-gated.
+  status: current
+  gap: >-
+    The developer-portal page carries no code sample; it links out to support documentation
+    behind a login (support.invoca.com returns HTTP 401).
+- name: InvocaJS Toolkit Library
+  level: page
+  audience: Developers implementing advanced web integrations
+  docs: https://developers.invoca.net/en/latest/web_integration/toolkit_library.html
+  description: >-
+    A library of JavaScript helper functions exposed on the page once InvocaJS is installed
+    and the Invoca network has been configured. Methods prefixed with an underscore are
+    explicitly documented as unstable and not for use.
+  namespace: Invoca.Tools
+  requires: InvocaJS installed on the site and network configuration by Invoca Customer Success / Implementation
+  status: current
+  functions:
+  - name: readInvocaData
+    signature: Invoca.Tools.readInvocaData(key, defaultValue)
+    description: Read a cached value out of the `invoca_session` cookie, falling back to defaultValue (or null).
+  - name: setCookie
+    signature: Invoca.Tools.setCookie(cookieName, cookieValue, lifetimeInDays)
+    description: Set a cookie at the current trueDomain.
+  - name: readCookie
+    signature: Invoca.Tools.readCookie(cookieName)
+    description: Return the value of a named cookie.
+  - name: parseReferrer
+    signature: Invoca.Tools.parseReferrer(campaignMapping, defaultValue)
+    description: >-
+      Search the referrer against a hash of string -> Campaign ID and return the matching
+      campaign ID, or defaultValue when no key matches.
+  - name: contains
+    signature: Invoca.Tools.contains(haystack, needle)
+    description: Boolean substring test.
+  - name: readUrl
+    signature: Invoca.Tools.readUrl(...)
+    description: Read a value from the current page URL.
+  - name: deviceType
+    signature: Invoca.Tools.deviceType()
+    description: Report the visitor's device type.
+  - name: isMobile
+    signature: Invoca.Tools.isMobile()
+    description: Boolean mobile-device test.
+  - name: waitFor
+    signature: Invoca.Tools.waitFor(...)
+    description: Defer execution until a condition or element is available.
+- name: Advertiser Web Integration
+  level: advertiser
+  audience: Advertisers installing on their own landing pages
+  docs: https://developers.invoca.net/en/latest/web_integration/advertiser_web_integration.html
+  description: >-
+    Advertiser-level dynamic number insertion. Settings can be supplied server side or client
+    side; documented capabilities include selector targeting, capturing additional parameters
+    with JavaScript, displaying different numbers on other pages, online click-to-call (CTC)
+    form settings, and swapping the number with jQuery.
+  status: current
+  legacy_domain_note: >-
+    Documentation references invoca.net; previous installations referencing ringrevenue.com
+    remain valid.
+  testing: See sandbox/invoca-sandbox.yml — append PPCPN=9999999999 to the landing-page URL.
+- name: SolutionsJS Web Integration (PNAPI)
+  level: page
+  docs: https://developers.invoca.net/en/latest/web_integration/pnapi_web_integration.html
+  description: >-
+    The previous-generation web integration library. Invoca's own notice states that Invoca
+    Tags is now the supported way to set up web integration, and that it internally uses the
+    InvocaJS library "formerly known as SolutionsJS". This is the ONLY Invoca client-side
+    loader with a publicly documented URL.
+  status: deprecated
+  deprecated: true
+  namespace: Invoca.PNAPI
+  loader:
+    url: //solutions.invocacdn.com/js/pnapi_integration-latest.min.js
+    cdn: solutions.invocacdn.com
+    pinned: false
+    version: null
+    note: >-
+      The published loader is the floating `-latest` build, so a consumer cannot tell which
+      version they receive and Invoca can change it under them without notice. No pinned URL
+      and no registry entry exists.
+  install: >-
+    <script type="text/javascript" src="//solutions.invocacdn.com/js/pnapi_integration-latest.min.js"></script>
+    <script type="text/javascript">Invoca.PNAPI.integration({networkId: YOUR_NETWORK_ID, numberSelector: ".YOUR_CLASS_SELECTOR"});</script>
+  placement: immediately above the closing </body> tag
+  requirements:
+  - Network is PNAPI enabled
+  - RingPools are type "Custom"
+  - Invoca Web Integration code installed on the page
+  api:
+  - name: Invoca.PNAPI.integration(options)
+    description: Initialise the integration with networkId and numberSelector.
+  - name: Invoca.PNAPI.run()
+    description: Re-run number replacement (for example after client-side navigation or DOM changes).
+  options:
+  - campaignIdOverrideParam
+  - data-invoca-campaign-id
+  - defaultCampaignId
+  - poolParams
+  - requiredParams
+related:
+  conventions: conventions/invoca-conventions.yml
+  sandbox: sandbox/invoca-sandbox.yml
+  lifecycle: lifecycle/invoca-lifecycle.yml

@@ -1,0 +1,192 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/invoca-sms-messaging-openapi.json
+docs: https://developers.invoca.net/en/latest/api_documentation/network_integration/index.html
+notes: >-
+  Two-part model. The `spec_entities` block is derived mechanically from the harvested
+  OpenAPI (schemas, path parameters and response shapes of the SMS Messaging API). The
+  `platform_entities` block is read from the Network Integration reference's own resource
+  list and the Signal / Call Ingestion / Calls In Progress / Ringpool reference pages; those
+  surfaces publish no machine-readable schema, so their fields are recorded only where the
+  documentation states them verbatim. Nothing here is inferred beyond what the spec or the
+  docs say.
+id_conventions:
+- entity: Message
+  form: UUID v4
+  example_field: uuid
+- entity: DeliveryReport
+  form: UUID v4
+  example_field: uuid
+- entity: PhoneNumber
+  form: E.164 string
+  example_field: phone_number
+- entity: Transaction (call)
+  form: 'dash-separated hex pair, e.g. 00000000-00000001'
+  example_field: transaction_id
+- entity: Network
+  form: integer
+  example_field: network_id
+spec_entities:
+- name: Message
+  source: openapi/invoca-sms-messaging-openapi.json
+  operations:
+  - GET /messages
+  - POST /messages
+  - GET /messages/phone_number/{phone_number}
+  - GET /messages/uuid/{message_uuid}
+  - DELETE /messages/uuid/{message_uuid}
+  fields:
+  - {name: uuid, type: string, role: identifier}
+  - {name: direction, type: string, note: 'in | out'}
+  - {name: from, type: string, note: E.164}
+  - {name: to, type: string, note: E.164}
+  - {name: text, type: string}
+  - {name: segments, type: integer}
+  - {name: cuid, type: string}
+  - {name: carrier_message_id, type: string, nullable: true}
+  - {name: virtual_line_id, type: integer, role: foreign-key}
+  - {name: created_at, type: string}
+  - {name: delivered_at, type: string, nullable: true}
+  - {name: failed_at, type: string, nullable: true}
+  - {name: deleted_at, type: string, nullable: true}
+  - {name: delivery_reports, type: array}
+- name: DeliveryReport
+  source: openapi/invoca-sms-messaging-openapi.json
+  operations:
+  - GET /messages/uuid/{message_uuid}/delivery_reports
+  - GET /messages/uuid/{message_uuid}/delivery_reports/uuid/{delivery_report_uuid}
+  fields:
+  - {name: uuid, type: string, role: identifier}
+  - {name: message_uuid, type: string, role: foreign-key}
+  - {name: progress_bit, type: integer}
+  - {name: destination, type: string, note: E.164}
+  - {name: carrier_description, type: string, nullable: true}
+  - {name: carrier_errorcode, type: string, nullable: true}
+  - {name: created_at, type: string}
+- name: PhoneNumber
+  source: openapi/invoca-sms-messaging-openapi.json
+  operations:
+  - GET /phone_numbers
+  - GET /phone_numbers/{phone_number}
+  - POST /phone_numbers/{phone_number}
+  - DELETE /phone_numbers/{phone_number}
+  - GET /messages/phone_number/{phone_number}/usage
+  fields:
+  - {name: phone_number, type: string, role: identifier, note: E.164}
+  - {name: virtual_line_id, type: integer, role: foreign-key}
+  - {name: network_id, type: integer, role: foreign-key}
+  - {name: carrier_interface, type: string, note: 'e.g. bandwidth'}
+  - {name: created_at, type: string}
+  - {name: enabled_at, type: string, nullable: true}
+  - {name: deleted_at, type: string, nullable: true}
+- name: MessageRequest
+  source: 'openapi/invoca-sms-messaging-openapi.json#/components/schemas/MessageRequest'
+  request_only: true
+  fields:
+  - {name: to, type: array of string}
+  - {name: from, type: string}
+  - {name: text, type: string}
+- name: DeliveryReportRequest
+  source: 'openapi/invoca-sms-messaging-openapi.json#/components/schemas/DeliveryReportRequest'
+  request_only: true
+  note: Carrier delivery-report callback payload shape (nested `message` object plus type/description/time).
+platform_entities:
+- name: Network
+  surface: Network Integration
+  aliases: []
+  note: The top-level tenant. `network_id` appears in Ringpool paths and in SMS PhoneNumber records.
+- name: Advertiser
+  surface: Network Integration
+  aliases: [merchant]
+- name: AdvertiserUser
+  surface: Network Integration
+- name: AdvertiserCampaign
+  surface: Network Integration
+  aliases: [offer]
+- name: Affiliate
+  surface: Network Integration
+  aliases: [publisher]
+- name: AffiliateCampaign
+  surface: Network Integration
+- name: AutoApproveAffiliateToCampaign
+  surface: Network Integration
+- name: PromoNumber
+  surface: Network Integration
+  note: The trackable phone number rendered on a landing page.
+- name: RingPool
+  surface: Network Integration / Bulk Ringpool API / Ringpool API (Legacy)
+  note: >-
+    A pool from which a dynamic trackable number is allocated per session. Types include
+    "Custom" (required by the SolutionsJS web integration).
+- name: Destination
+  surface: Network Integration
+- name: InvocaTag
+  surface: Network Integration
+- name: InvocaTagRevision
+  surface: Network Integration
+  note: Versioned revisions of a tag; a publishing confirmation workflow shipped 2025-11.
+- name: CallRecording
+  surface: Network Integration
+- name: PromptRecording
+  surface: Network Integration
+  note: 'Sub-types documented: Condition Prompt, Voice Call Recorded Prompt, Whisper Prompt, Custom Challenge Prompt, Custom Wrong/No Keypress Error Prompt.'
+- name: SpeechRecognition
+  surface: Network Integration
+- name: CallActivityTracking
+  surface: Network Integration
+- name: Transaction
+  surface: Transactions API
+  note: >-
+    A call. The central attribution record, read through advertiser_user, affiliate_user and
+    network_user views. Endpoint form https://invoca.net/api/2018-02-01/transactions.json
+- name: Signal
+  surface: Signal API
+  key: [name, partner_unique_id]
+  fields_documented:
+  - transaction_id
+  - corrects_transaction_id
+  - name
+  - partner_unique_id
+  - occurred_at_time_t
+  - occurred_at_time
+  - value
+  note: >-
+    Applied to a Transaction after the call. Boolean outcome markers; Custom Data Fields
+    carry alphanumeric values alongside them.
+- name: CustomDataField
+  surface: Signal API
+- name: Call
+  surface: Call Ingestion API
+  note: An externally originated call submitted for Invoca processing. Endpoint form https://invoca.net/api/2022-03-01/calls.json
+- name: CallInProgress
+  surface: Calls In Progress API
+  note: Live/in-flight call used for pre-call (PreSense) insight. Endpoint form https://invoca.net/api/2022-08-01/calls_in_progress/current_calls.json
+- name: Transcript
+  surface: Call API
+  note: 'Reference pages: transcript_api, transcript_analysis_api, transcript_analysis_v2_api.'
+relationships:
+- {from: Message, to: DeliveryReport, type: has_many, via: message_uuid, source: openapi}
+- {from: Message, to: PhoneNumber, type: belongs_to, via: virtual_line_id, source: openapi}
+- {from: PhoneNumber, to: Network, type: belongs_to, via: network_id, source: openapi}
+- {from: DeliveryReport, to: Message, type: belongs_to, via: message_uuid, source: openapi}
+- {from: Network, to: Advertiser, type: has_many, source: docs}
+- {from: Network, to: Affiliate, type: has_many, source: docs}
+- {from: Advertiser, to: AdvertiserUser, type: has_many, source: docs}
+- {from: Advertiser, to: AdvertiserCampaign, type: has_many, source: docs}
+- {from: Affiliate, to: AffiliateCampaign, type: has_many, source: docs}
+- {from: AdvertiserCampaign, to: RingPool, type: has_many, source: docs}
+- {from: RingPool, to: PromoNumber, type: has_many, source: docs}
+- {from: Transaction, to: Signal, type: has_many, via: transaction_id, source: docs}
+- {from: Transaction, to: CustomDataField, type: has_many, via: transaction_id, source: docs}
+- {from: Transaction, to: Transcript, type: has_one, via: transaction_id, source: docs}
+- {from: Signal, to: Signal, type: has_one, via: corrects_transaction_id, note: supersession chain, source: docs}
+- {from: Transaction, to: AdvertiserCampaign, type: belongs_to, source: docs}
+- {from: CallInProgress, to: Transaction, type: has_one, note: a call in progress becomes a transaction once complete, source: docs}
+coverage:
+  spec_entities: 5
+  platform_entities: 20
+  relationships: 17
+  machine_readable_coverage: >-
+    Only the SMS Messaging surface (3 resource entities) has a machine-readable schema. The
+    attribution core — Transaction, Signal, Call, RingPool, Advertiser, Affiliate — is
+    documented in prose only.

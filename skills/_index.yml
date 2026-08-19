@@ -1,0 +1,45 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  Grounded in openapi/invoca-sms-messaging-openapi.json (harvested verbatim) and the Invoca
+  developer portal reference pages at developers.invoca.net. No Invoca-published skills or
+  AGENTS.md exist — the GitHub organization and the developer portal were both checked.
+notes: >-
+  Invoca declares no operationIds anywhere (the one machine-readable document omits them
+  entirely), so every skill references operations as METHOD /path taken verbatim from the
+  spec or from the endpoint URLs printed in the reference pages. Nothing is invented.
+skills:
+- file: invoca-report-signal.md
+  name: Report a conversion Signal against an Invoca call
+  api: Invoca Signal API
+  docs: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
+  operations:
+  - POST https://invoca.net/api/<version>/transactions.json
+  covers: [authentication, call identification, natural-key idempotency, self-correction, error envelope]
+- file: invoca-ingest-call.md
+  name: Ingest an externally originated call into Invoca
+  api: Invoca Call Ingestion API
+  docs: https://developers.invoca.net/en/latest/api_documentation/call_ingestion_api/index.html
+  operations:
+  - POST https://invoca.net/api/2022-03-01/calls.json
+  covers: [authentication, timestamp formats, phone number fields, recording handoff, retry gap]
+- file: invoca-sms-messaging.md
+  name: Send and track SMS through the Invoca SMS Messaging API
+  api: openapi/invoca-sms-messaging-openapi.json
+  operations:
+  - POST /messages
+  - GET /messages
+  - GET /messages/phone_number/{phone_number}
+  - GET /messages/phone_number/{phone_number}/usage
+  - GET /messages/uuid/{message_uuid}
+  - DELETE /messages/uuid/{message_uuid}
+  - GET /messages/uuid/{message_uuid}/delivery_reports
+  - GET /messages/uuid/{message_uuid}/delivery_reports/uuid/{delivery_report_uuid}
+  - GET /phone_numbers
+  - POST /phone_numbers/{phone_number}
+  - GET /phone_numbers/{phone_number}
+  - DELETE /phone_numbers/{phone_number}
+  covers: [number provisioning, send, delivery reports, pagination, usage/segments]
+  caveat: >-
+    The spec publishes no servers[] and no securitySchemes; the skill says so explicitly and
+    does not guess a host.

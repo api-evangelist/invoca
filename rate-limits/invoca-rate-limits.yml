@@ -1,0 +1,48 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.invoca.net/en/latest/basics/design_principles.html
+fetched: '2026-08-13'
+limit_count: 0
+documented: false
+finding: >-
+  Invoca publishes no rate limits. Every page of the developer portal was read for a rate,
+  quota, throttling or 429 statement and none exists: the design-principles page, the error
+  handling page, the API-credential guidelines, and each API reference (Transactions, Signal,
+  Call, Call Ingestion, Calls In Progress, Network Integration, Bulk Ringpool, legacy
+  Ringpool) document status codes but no limit and no rate-limit response headers. The
+  harvested SMS Messaging OpenAPI declares no 429 response on any of its 12 operations.
+  The Invoca Support knowledge base (support.invoca.com, community.invoca.com) is
+  authentication-gated (HTTP 401), so a limit published only to customers would not be
+  visible here.
+headers:
+  documented: []
+  observed: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header is documented anywhere in the public
+    developer portal, and none could be observed because every Invoca API endpoint requires a
+    credential.
+exhaustion_status: null
+limits: []
+capacity_signals:
+- surface: Bulk Ringpool API
+  endpoint: https://pnapi.invoca.net/api/2013-07-01/bulk.json
+  note: >-
+    Invoca positions the Bulk Ringpool API as the high-throughput replacement for the legacy
+    Ringpool API for high-request-per-second trackable-number allocation. This is a capacity
+    statement, not a published limit — no numeric rate is given.
+  source: https://developers.invoca.net/en/latest/api_documentation/bulk_ringpool_api.html
+- surface: plan quotas
+  note: >-
+    The only published numeric ceilings are commercial, not per-request: 6,000 / 12,000 /
+    18,000 annual local or toll-free numbers and 5 / 50 / 100 custom Signals across the Pro /
+    Enterprise / Elite tiers. Captured in plans/invoca-plans-pricing.yml.
+  source: https://www.invoca.com/pricing
+evidence:
+- url: https://developers.invoca.net/en/latest/basics/design_principles.html
+  status: 200
+- url: https://developers.invoca.net/en/latest/basics/error_handling.html
+  status: 200
+- url: https://developers.invoca.net/en/latest/api_documentation/manage_api_credentials.html
+  status: 200
+- url: https://support.invoca.com/hc/en-us
+  status: 401

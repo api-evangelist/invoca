@@ -1,0 +1,60 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Invoca SMS Messaging API
+  version: 1.0.0
+extends: openapi/invoca-sms-messaging-openapi.json
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Derived from openapi/invoca-sms-messaging-openapi.json (harvested verbatim from
+  developers.invoca.net) plus the Invoca developer-portal design-principles,
+  error-handling and credential pages. Captures API Evangelist annotations only;
+  the harvested specification is never mutated.
+actions:
+- target: $.info
+  description: Record provenance and API Evangelist annotations on the harvested document.
+  update:
+    x-apievangelist-provider: invoca
+    x-apievangelist-source: https://developers.invoca.net/en/latest/_static/js/swagger-ui/swagger-initializer.js
+    x-apievangelist-harvested: '2026-08-13'
+    x-apievangelist-note: >-
+      Embedded inline in the developer portal's Swagger UI initializer; no page in the
+      portal renders it. servers[] is empty upstream and Invoca does not publish an SMS
+      Messaging base URL, so no server has been added here.
+- target: $.info
+  description: Point at the human documentation for the surrounding platform.
+  update:
+    x-apievangelist-documentation: https://developers.invoca.net/en/latest/api_documentation/index.html
+- target: $
+  description: >-
+    Record the platform-wide authentication contract, which the harvested document omits
+    entirely (it declares no securitySchemes and applies no security).
+  update:
+    x-apievangelist-authentication:
+      artifact: authentication/invoca-authentication.yml
+      docs: https://developers.invoca.net/en/latest/api_documentation/manage_api_credentials.html
+      styles:
+      - Authorization header carrying an Invoca API token
+      - oauth_token URL query parameter (GET)
+      - oauth_token key in the JSON body (POST)
+      - HTTP Basic
+      gap: >-
+        securitySchemes are absent from the harvested specification even though every
+        Invoca API requires a credential.
+- target: $
+  description: Record the cross-cutting conventions captured for this provider.
+  update:
+    x-apievangelist-conventions: conventions/invoca-conventions.yml
+    x-apievangelist-errors: errors/invoca-problem-types.yml
+    x-apievangelist-lifecycle: lifecycle/invoca-lifecycle.yml
+    x-apievangelist-data-model: data-model/invoca-data-model.yml
+- target: $.paths['/messages'].post
+  description: Note the natural-key idempotency contract Invoca documents platform-wide.
+  update:
+    x-apievangelist-idempotency:
+      style: design-level
+      note: >-
+        Invoca's design principles state that most interfaces are idempotent — safe to
+        call more than once with the same parameters. There is no client-supplied
+        Idempotency-Key header.
+      source: https://developers.invoca.net/en/latest/basics/design_principles.html

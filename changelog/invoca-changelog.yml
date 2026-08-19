@@ -1,0 +1,200 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.invoca.com/latest-releases
+fetched: '2026-08-13'
+http_status: 200
+title: Latest Releases
+scheme: dated-product-releases
+granularity: month
+current_version: '2026-07'
+notes: >-
+  Invoca publishes a product release feed on its marketing site, grouped by month and
+  categorised by product area (SMS Agent, Signal AI, Integrations, General, Dashboards,
+  Transcripts, Voice Agent, QM, Scorecards, Google). Entries are feature announcements — they
+  carry no version numbers, no API version bindings and no breaking-change markers. The
+  date-versioned API surface itself is tracked separately in
+  lifecycle/invoca-lifecycle.yml; the developer portal
+  (developers.invoca.net) publishes NO changelog or release-notes page of its own
+  (/changelog.html and /release_notes.html both 404), so an API consumer has no
+  developer-facing record of what changed between date versions.
+api_changelog:
+  present: false
+  evidence:
+  - url: https://developers.invoca.net/en/latest/changelog.html
+    status: 404
+  - url: https://developers.invoca.net/en/latest/release_notes.html
+    status: 404
+categories:
+- SMS Agent
+- Signal AI
+- Integrations
+- General
+- Dashboards
+- Transcripts
+- Voice Agent
+- QM
+- Scorecards
+- Google
+entries:
+- date: '2026-07'
+  category: SMS Agent
+  title: 'AI Agent Version History Management'
+  breaking: false
+- date: '2026-07'
+  category: General
+  title: 'Advanced Redaction: Feature Updates'
+  breaking: false
+- date: '2026-07'
+  category: Integrations
+  title: 'Roku: Integration'
+  breaking: false
+  additions: [Roku integration]
+- date: '2026-07'
+  category: General
+  title: Lead Form Attribution
+  breaking: false
+- date: '2026-07'
+  category: SMS Agent
+  title: 'AI Messaging Agent: Inbound Text Support'
+  breaking: false
+- date: '2026-07'
+  category: SMS Agent
+  title: 'AI Messaging Agent: Engage Abandoned Multi-Step Forms'
+  breaking: false
+- date: '2026-07'
+  category: SMS Agent
+  title: 'AI Messaging Agent: Newly Supported Lead Forms'
+  breaking: false
+- date: '2026-07'
+  category: Integrations
+  title: 'HubSpot: Scheduling Integration'
+  breaking: false
+- date: '2026-06'
+  category: Integrations
+  title: 'Salesforce: Scheduling Integration'
+  breaking: false
+- date: '2026-06'
+  category: SMS Agent
+  title: 'AI Messaging Agent: Knowledge Updates'
+  breaking: false
+- date: '2026-06'
+  category: Integrations
+  title: 'NexHealth Synchronizer: Scheduling Integration'
+  breaking: false
+- date: '2026-05'
+  category: Integrations
+  title: Vibe.co Integration
+  breaking: false
+- date: '2026-05'
+  category: Integrations
+  title: ChatGPT Ads Integration
+  breaking: false
+- date: '2026-05'
+  category: Signal AI
+  title: 'Signal AI Studio: Pause Label Training'
+  breaking: false
+- date: '2026-04'
+  category: General
+  title: Set Specific Business Hours for Static Numbers
+  breaking: false
+- date: '2026-04'
+  category: Signal AI
+  title: Semantic Signals
+  breaking: false
+- date: '2026-04'
+  category: SMS Agent
+  title: 'AI Messaging Agent: Signal Support'
+  breaking: false
+- date: '2026-04'
+  category: SMS Agent
+  title: 'AI Messaging Agent: CRM Lead Capture'
+  breaking: false
+- date: '2026-04'
+  category: SMS Agent
+  title: 'AI Messaging Agent: Digital Journey & Intent Data'
+  breaking: false
+- date: '2026-04'
+  category: SMS Agent
+  title: 'AI Messaging Agent: Multi-Location & Agency Support'
+  breaking: false
+- date: '2026-04'
+  category: SMS Agent
+  title: 'AI Messaging Agent: Lead Form Follow-Up'
+  breaking: false
+- date: '2026-04'
+  category: General
+  title: IVR A/B Testing
+  breaking: false
+- date: '2026-03'
+  category: SMS Agent
+  title: AI Messaging Agent
+  breaking: false
+  highlights: Launch of the AI Messaging Agent product line.
+- date: '2026-01'
+  category: Integrations
+  title: 'NEW Integration: Dynamic Yield'
+  breaking: false
+- date: '2026-01'
+  category: Dashboards
+  title: Increased Marketing Channel Field Availability
+  breaking: false
+- date: '2026-01'
+  category: Integrations
+  title: 'Conditional Firing Rules: Partner Platform Integrations'
+  breaking: false
+- date: '2026-01'
+  category: Signal AI
+  title: 'Signal AI Studio: View Call Details'
+  breaking: false
+- date: '2026-01'
+  category: Signal AI
+  title: Lead and Conversion Signal Labels
+  breaking: false
+- date: '2025-11'
+  category: Signal AI
+  title: Upgrade Legacy Signals to Signal AI Studio
+  breaking: false
+  highlights: Migration path off the legacy Signals surface.
+- date: '2025-11'
+  category: General
+  title: Redaction for French and Spanish Languages
+  breaking: false
+- date: '2025-11'
+  category: Integrations
+  title: 'NEW Integration: LinkedIn'
+  breaking: false
+- date: '2025-11'
+  category: Integrations
+  title: 'NEW Integration: Reddit'
+  breaking: false
+- date: '2025-11'
+  category: Integrations
+  title: Genesys Call Data Integration
+  breaking: false
+- date: '2025-09'
+  category: Signal AI
+  title: 'Signal AI Studio: Easier Signal Editing'
+  breaking: false
+- date: '2025-09'
+  category: Integrations
+  title: 'NEW Integrations: tvScientific, StackAdapt, Innovid, iSpot'
+  breaking: false
+- date: '2025-07'
+  category: Transcripts
+  title: Sentiment Analysis
+  breaking: false
+- date: '2025-07'
+  category: General
+  title: Bulk Toll-Free Number Ordering
+  breaking: false
+- date: '2025-04'
+  category: General
+  title: AI Summaries API
+  breaking: false
+  highlights: >-
+    An API-surface release announced only on the marketing release feed; no corresponding
+    reference page exists in the developer portal.
+- date: '2025-04'
+  category: General
+  title: AI Search Engine Attribution
+  breaking: false

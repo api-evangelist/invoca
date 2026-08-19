@@ -1,27 +1,68 @@
-generated: '2026-07-19'
-method: searched
-source: live probes of /.well-known/* on Invoca hosts
+generated: '2026-08-13'
+method: probed
+source: live probes of /.well-known/* on every Invoca host
+checked: '2026-08-13'
+result: none
+hit_count: 0
 notes: >-
-  No /.well-known/ discovery documents are published on Invoca's public hosts.
-  Absence recorded as valid data. A separate llms.txt IS published at
-  https://www.invoca.com/llms.txt (saved verbatim at llms/invoca-llms.txt).
+  Invoca publishes NO /.well-known/ discovery document on any of its hosts. Every canonical
+  path was probed on the marketing host, the API host, the developer portal, the Bulk
+  Ringpool host and the trust host, and none returned a real document.
+
+  IMPORTANT — trust.invoca.com is a SPA catch-all. It answers HTTP 200 with the same
+  `<!doctype html>` application shell for EVERY /.well-known/* path, including paths that
+  cannot exist. Those 200s are recorded below as false positives and are NOT counted as
+  hits. No `type: WellKnown` and no `type: SecurityTxt` pointer is wired in apis.yml, because
+  a pointer would assert that Invoca serves a discovery surface it does not serve.
+
+  Invoca DOES publish an llms.txt at https://www.invoca.com/llms.txt (HTTP 200, saved
+  verbatim at llms/invoca-llms.txt), but that is a root-path document, not a /.well-known
+  one, and is pointed at by the LLMsTxt type instead.
 hosts:
 - host: https://www.invoca.com
   documents:
-  - path: /.well-known/security.txt
-    status: 404
-  - path: /llms.txt
-    status: 200
-    note: Not a /.well-known path; saved at llms/invoca-llms.txt
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404, note: 'body is an "Invalid .well-known request" HTML page'}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 200, file: ../llms/invoca-llms.txt, note: 'Not a /.well-known path.'}
+- host: https://invoca.net
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
 - host: https://developers.invoca.net
   documents:
-  - path: /.well-known/security.txt
-    status: 404
-  - path: /.well-known/openid-configuration
-    status: 404
-- host: https://api.invoca.net
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://pnapi.invoca.net
   documents:
-  - path: /.well-known/security.txt
-    status: 404
-  - path: /.well-known/openid-configuration
-    status: 404
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+- host: https://trust.invoca.com
+  spa_catch_all: true
+  documents:
+  - {path: /.well-known/security.txt, status: 200, hit: false, content_type: text/html, note: SPA shell, not a document}
+  - {path: /security.txt, status: 200, hit: false, content_type: text/html, note: SPA shell, not a document}
+  - {path: /.well-known/openid-configuration, status: 200, hit: false, content_type: text/html, note: SPA shell, not a document}
+  - {path: /.well-known/oauth-authorization-server, status: 200, hit: false, content_type: text/html, note: SPA shell, not a document}
+  - {path: /.well-known/oauth-protected-resource, status: 200, hit: false, content_type: text/html, note: SPA shell, not a document}
+  - {path: /.well-known/api-catalog, status: 200, hit: false, content_type: text/html, note: SPA shell, not a document}
+  - {path: /.well-known/ai-plugin.json, status: 200, hit: false, content_type: text/html, note: SPA shell, not a document}

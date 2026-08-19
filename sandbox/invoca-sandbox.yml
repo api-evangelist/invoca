@@ -1,0 +1,91 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.invoca.net/en/latest/web_integration/advertiser_web_integration.html
+fetched: '2026-08-13'
+summary: >-
+  Invoca has no test-vs-live key separation and no public sandbox host. There is one
+  credential type — an Invoca API token minted in the platform UI — and it inherits the
+  privileges of the user who generated it, against live data. What Invoca does publish is a
+  documented magic test value for the browser-side web integration, an in-platform
+  integration test tool, and a "call in progress" mode on the Signal API that lets a caller
+  be simulated as still live. A separate demo environment exists but is a paid Enterprise
+  tier entitlement, not a self-serve developer sandbox.
+test_live_separation:
+  supported: false
+  key_prefixes: []
+  note: >-
+    Invoca API tokens carry no test/live prefix or mode flag. Tokens are created under
+    Integrations > Manage Integrations > Invoca APIs > "+ New API Credential" and act with the
+    generating user's privileges. Invoca's own guidance is that users generate their own
+    tokens, that tokens be treated like passwords, and that network users must not generate
+    tokens on behalf of Advertisers or Publishers.
+  source: https://developers.invoca.net/en/latest/api_documentation/manage_api_credentials.html
+sandbox_environment:
+  self_serve: false
+  entitlement: Enterprise tier and above
+  name: Sandbox demo environment
+  source: https://www.invoca.com/pricing
+  note: >-
+    Listed as an Enterprise-tier feature on the public pricing page. No host, credential
+    flow, or documentation for it is published on the developer portal.
+magic_values:
+- name: PPCPN test promo number
+  value: '9999999999'
+  usage: >-
+    Append PPCPN=9999999999 to any web-integrated landing-page URL (with `?` when there is no
+    query string, `&` when there is). A correctly installed web integration replaces every
+    matching number on the page with 999-999-9999. If the numbers do not change, the tag is
+    not installed correctly.
+  examples:
+  - http://www.invoca.com/corporate/landhere/?r=1&PPCPN=9999999999
+  - http://www.invoca.com?PPCPN=9999999999
+  surface: Advertiser Web Integration / Invoca Tags
+  source: https://developers.invoca.net/en/latest/web_integration/advertiser_web_integration.html
+test_tooling:
+- name: Web Integration Integration Test
+  type: in-platform
+  usage: >-
+    Advertiser Home > Web Integration panel > "Integration Test" > "Open Test" > "Start Test".
+    A green checkmark means the tag is installed and the landing page reachable; a red
+    exclamation means it is not.
+  source: https://developers.invoca.net/en/latest/web_integration/advertiser_web_integration.html
+- name: Session-login authentication for browser testing
+  type: auth-mode
+  usage: >-
+    Invoca supports session-login authentication against the API for browser-based testing
+    only; it is not a supported programmatic auth mode.
+  source: https://developers.invoca.net/en/latest/basics/design_principles.html
+simulation:
+- name: call_in_progress
+  surface: Signal API
+  usage: >-
+    Setting the `call_in_progress` request parameter to true causes the Signal API to answer
+    201 Created rather than 200 OK, allowing signals to be applied against a call modelled as
+    still live rather than completed.
+  source: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
+- name: Signal natural-key replay
+  surface: Signal API
+  usage: >-
+    Because a Signal is keyed on (name, partner_unique_id), the same request can be replayed
+    safely: an identical repeat is a no-op, and a changed field updates the original signal
+    and returns a new transaction_id carrying `corrects_transaction_id` pointing at the
+    superseded one. This is the safest way to exercise the Signal API without creating
+    duplicate data.
+  source: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
+gaps:
+- >-
+    No published sandbox base URL, no test credentials, and no fixture or trigger tooling for
+    the REST APIs. Every documented endpoint is a production endpoint on
+    https://invoca.net/api/<version>/ (or https://pnapi.invoca.net for Bulk Ringpool).
+- >-
+    Documentation values such as transaction_id "00000000-00000001" and phone number
+    "+18885550100" are illustrative examples in the docs and the harvested OpenAPI. They are
+    NOT reserved test identifiers and are not recorded here as such.
+- >-
+    The Invoca support knowledge base, which the developer portal defers to for tag
+    installation, is authentication-gated (support.invoca.com HTTP 401), so any additional
+    test guidance published there is not publicly verifiable.
+related:
+  authentication: authentication/invoca-authentication.yml
+  components: components/invoca-components.yml
+  plans: plans/invoca-plans-pricing.yml

@@ -1,0 +1,125 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Registry searches against npm (registry.npmjs.org), PyPI, RubyGems and the Invoca GitHub
+  organization (github.com/Invoca, 180 public repositories), plus the Invoca developer portal
+  SDK/credential pages.
+finding: >-
+  Invoca publishes NO first-party client library for the Invoca API in any registry. There is
+  no invoca package on PyPI (404), no Invoca-authored package on npm (the `invoca`,
+  `@invoca/*` names on npm are an unrelated 2020 "2D Point" placeholder published by an
+  outside user, NOT Invoca), and no API-client gem on RubyGems. The Invoca GitHub org is
+  large and active, but every public gem it ships is internal Ruby/Rails infrastructure
+  tooling — logging, metrics, schema declaration, process settings — not a wrapper around
+  the Invoca API. Integration is expected to be direct HTTPS against the date-versioned REST
+  endpoints, or through the no-code platform integrations.
+sdk_count: 0
+api_client_count: 0
+packages:
+- language: ruby
+  registry: rubygems
+  name: invoca-utils
+  url: https://rubygems.org/gems/invoca-utils
+  install: gem install invoca-utils
+  official: true
+  api_client: false
+  version: 0.7.0
+  published: '2026-06-17'
+  source_code: https://github.com/Invoca/invoca-utils
+  note: A public collection of Ruby helpers used across Invoca's own projects. Not an Invoca API client.
+- language: ruby
+  registry: rubygems
+  name: exception_handling
+  url: https://rubygems.org/gems/exception_handling
+  install: gem install exception_handling
+  official: true
+  api_client: false
+  version: 3.2.0
+  published: '2026-08-06'
+  source_code: https://github.com/Invoca/exception_handling
+  note: Invoca's open-source Rails exception logger/emailer. Internal infrastructure, not an API client.
+- language: ruby
+  registry: rubygems
+  name: declare_schema
+  url: https://rubygems.org/gems/declare_schema
+  install: gem install declare_schema
+  official: true
+  api_client: false
+  version: 4.1.0
+  published: '2026-07-08'
+  source_code: https://github.com/Invoca/declare_schema
+  note: Declare ActiveRecord model schemas and generate migrations. Internal infrastructure, not an API client.
+- language: ruby
+  registry: rubygems
+  name: contextual_logger
+  url: https://rubygems.org/gems/contextual_logger
+  install: gem install contextual_logger
+  official: true
+  api_client: false
+  version: 1.5.0
+  published: '2025-09-12'
+  source_code: https://github.com/Invoca/contextual_logger
+  note: Adds structured context to Ruby logs. Internal infrastructure, not an API client.
+- language: ruby
+  registry: rubygems
+  name: process_settings
+  url: https://rubygems.org/gems/process_settings
+  install: gem install process_settings
+  official: true
+  api_client: false
+  version: 0.21.0
+  published: '2025-02-18'
+  source_code: https://github.com/Invoca/process_settings
+  note: Dynamic process settings for Ruby services. Internal infrastructure, not an API client.
+- language: ruby
+  registry: rubygems
+  name: invoca-metrics
+  url: https://rubygems.org/gems/invoca-metrics
+  install: gem install invoca-metrics
+  official: true
+  api_client: false
+  version: 0.0.2
+  published: '2023-01-18'
+  source_code: https://github.com/Invoca/invoca-metrics
+  note: >-
+    Statsd-style metrics helper. Internal infrastructure, not an API client. Last release
+    2023-01-18 — over three years stale.
+- language: javascript
+  registry: cdn
+  name: pnapi_integration (SolutionsJS / Invoca.PNAPI)
+  url: https://solutions.invocacdn.com/js/pnapi_integration-latest.min.js
+  install: <script src="//solutions.invocacdn.com/js/pnapi_integration-latest.min.js"></script>
+  official: true
+  api_client: false
+  deprecated: true
+  version: null
+  published: null
+  note: >-
+    The only Invoca browser library with a publicly documented distribution URL, and it is
+    UNPINNED — the published path floats to `-latest`, there is no version in the URL, no
+    registry entry (invocacdn.com is Invoca's own CDN and exposes no metadata endpoint), and
+    no jsDelivr/unpkg mirror to query. A consumer cannot determine which build they are being
+    served, which is itself the finding. Invoca documents this surface as deprecated in
+    favour of Invoca Tags. Catalogued in components/invoca-components.yml.
+- language: javascript
+  registry: none
+  name: InvocaJS (Invoca Tag)
+  url: https://developers.invoca.net/en/latest/web_integration/toolkit_library.html
+  official: true
+  api_client: false
+  version: null
+  published: null
+  note: >-
+    The current-generation browser tag is not distributed through any package registry or a
+    public CDN URL at all. The loader snippet is generated per-account inside the Invoca
+    platform (Advertiser Home > Tools > Web Integration > "Get Code"), so there is no public
+    artifact to version. Catalogued in components/invoca-components.yml.
+notes:
+- >-
+    The npm names `invoca`, `@invoca/service`, `@invoca/loader`, `@invoca/config` and
+    `invoca-helloword-example` are all v0.0.1, all published 2020-02-16 by the npm user
+    `inonjs`, and all described as "2D Point". They are squatted/unrelated and are NOT
+    listed above.
+- >-
+    No `type: SDKs` pointer is wired in apis.yml, because no entry above is a client library
+    for the Invoca API. Emitting one would credit Invoca with an SDK it does not ship.

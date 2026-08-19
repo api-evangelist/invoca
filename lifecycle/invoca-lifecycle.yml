@@ -1,4 +1,4 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
 source: https://developers.invoca.net/en/latest/basics/design_principles.html
 versioning:
@@ -28,8 +28,59 @@ deprecation:
   deprecated_apis:
   - name: Ringpool API (legacy)
     superseded_by: Bulk Ringpool API
-  sunset_header: unknown
+    docs: https://developers.invoca.net/en/latest/api_documentation/ringpool.html
+    note: The reference page is titled "Ringpool API (Legacy)".
+  - name: SolutionsJS Web Integration (Invoca.PNAPI)
+    superseded_by: Invoca Tags / InvocaJS
+    docs: https://developers.invoca.net/en/latest/web_integration/pnapi_web_integration.html
+    note: >-
+      Invoca's own notice: "Invoca Tags is the supported way for setting up web integration
+      (which internally uses the InvocaJS library, formerly known as SolutionsJS)." The
+      deprecated loader is still served from //solutions.invocacdn.com/js/pnapi_integration-latest.min.js
+      with no sunset date announced.
+  - name: Legacy Signals
+    superseded_by: Signal AI Studio
+    note: >-
+      "Upgrade Legacy Signals to Signal AI Studio" shipped 2025-11 on the product release
+      feed; no API-level deprecation notice accompanies it.
+  sunset_header: false
+  sunset_header_note: >-
+    No RFC 8594 Sunset or Deprecation response header is documented on any Invoca surface, and
+    none is declared in the harvested OpenAPI. Deprecation is communicated in prose on the
+    reference pages only.
+  legacy_domains:
+  - domain: ringrevenue.com
+    status: still-valid
+    note: >-
+      "This documentation references invoca.net in the Web Integration examples below.
+      However, previous installations referencing ringrevenue.com are still valid." No
+      retirement date is published for the pre-rebrand domain.
+    source: https://developers.invoca.net/en/latest/web_integration/advertiser_web_integration.html
 status_page: https://status.invoca.com
 sla:
   url: https://status.invoca.com
   notes: Component-level uptime and incident history published on the status page.
+changelog:
+  developer_portal: false
+  product_feed: https://www.invoca.com/latest-releases
+  artifact: changelog/invoca-changelog.yml
+  note: >-
+    Invoca publishes a monthly product release feed on its marketing site, but the developer
+    portal has no changelog or release-notes page (/changelog.html and /release_notes.html
+    both 404 as of 2026-08-13). There is no developer-facing record of what changed between
+    date versions of the API.
+spec_versions:
+- artifact: openapi/invoca-sms-messaging-openapi.json
+  api: SMS Messaging API
+  info_version: '2022-08-01'
+  path_prefix: /sms/2022-08-01/
+  note: >-
+    Byte-identical under every published docs version (/en/latest/, /en/2026-02-01/,
+    /en/2022-08-01/, /en/2019-05-01/, /en/2019-02-01/, /en/2017-04-01/, /en/2016-08-22/), so
+    the spec is NOT versioned alongside the docs it ships with.
+docs_versions_probed:
+  live: ['latest', '2026-02-01', '2022-08-01', '2019-05-01', '2019-02-01', '2017-04-01', '2016-08-22']
+  missing:
+  - {version: stable, status: 404}
+  - {version: '2013-03-22', status: 404, note: 'Documented as a supported XML version in design principles, but its docs build is gone.'}
+  checked: '2026-08-13'
