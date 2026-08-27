@@ -54,40 +54,46 @@ tags_raw:
 - Telephony
 - Analytics
 apis:
-- name: Invoca API
-  description: >-
-    Invoca's date-versioned REST developer platform covering call transactions,
-    signal reporting, call ingestion, RingPool trackable-number allocation,
-    network integration, and pre-call (PreSense) insight. Version is specified as
-    a date in the URL path; JSON is the format for all development since the
-    2022-08-01 version. Authenticated with self-serve Invoca API tokens or HTTP
-    Basic auth.
+- aid: invoca:invoca-messages-api
+  name: Invoca Messages API
+  description: Messages
   humanURL: https://developers.invoca.net/en/latest/api_documentation/index.html
   baseURL: https://invoca.net
   tags:
-  - Call Tracking
-  - Conversation Intelligence
-  - Telephony
-  - Attribution
+  - messages
   properties:
+  - type: OpenAPI
+    url: openapi/invoca-messages-api-openapi.yml
   - type: Documentation
     url: https://developers.invoca.net/en/latest/api_documentation/index.html
   - type: APIReference
     url: https://developers.invoca.net/en/latest/api_documentation/index.html
   - type: SignalAPI
     url: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
+- aid: invoca:invoca-phone-numbers-api
+  name: Invoca Phone Numbers API
+  description: Phone Numbers
+  humanURL: https://developers.invoca.net/en/latest/api_documentation/index.html
+  baseURL: https://invoca.net
+  tags:
+  - phone_numbers
+  properties:
   - type: OpenAPI
-    name: Invoca SMS Messaging API (OpenAPI 3.0.3, 2022-08-01)
-    url: openapi/invoca-sms-messaging-openapi.json
-  - type: Overlay
-    name: API Evangelist enhancements for the Invoca SMS Messaging API
-    url: overlays/invoca-sms-messaging-overlay.yaml
+    url: openapi/invoca-phone-numbers-api-openapi.yml
+  - type: Documentation
+    url: https://developers.invoca.net/en/latest/api_documentation/index.html
+  - type: APIReference
+    url: https://developers.invoca.net/en/latest/api_documentation/index.html
+  - type: SignalAPI
+    url: https://developers.invoca.net/en/latest/api_documentation/signal_api/index.html
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/invoca-sms-messaging-overlay.yaml
 - type: Website
   url: http://www.invoca.com
 - type: DeveloperPortal
