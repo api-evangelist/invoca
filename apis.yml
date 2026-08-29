@@ -10,6 +10,17 @@ description: >-
   (developers.invoca.net) with date-versioned APIs covering call transactions,
   signals, call ingestion, RingPool number allocation, network integration, and
   pre-call insight, authenticated with self-serve Invoca API tokens or HTTP Basic.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
