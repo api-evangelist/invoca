@@ -71,6 +71,8 @@ apis:
   humanURL: https://developers.invoca.net/en/latest/api_documentation/index.html
   baseURL: https://invoca.net
   tags:
+  - Message
+  tags_raw:
   - messages
   properties:
   - type: OpenAPI
@@ -87,6 +89,8 @@ apis:
   humanURL: https://developers.invoca.net/en/latest/api_documentation/index.html
   baseURL: https://invoca.net
   tags:
+  - Phone Numbers
+  tags_raw:
   - phone_numbers
   properties:
   - type: OpenAPI
