@@ -5,7 +5,7 @@ info:
   description: Phone Numbers
 servers: []
 tags:
-- name: phone_numbers
+- name: Phone Numbers
   description: Phone Numbers
 paths:
   /phone_numbers:
@@ -118,7 +118,9 @@ paths:
                         type: string
           description: get the first page of paginated phone numbers
       tags:
-      - phone_numbers
+      - Phone Numbers
+      operationId: getPhoneNumbers
+      x-operation-id-source: derived
   /phone_numbers/{phone_number}:
     delete:
       summary: Deletes a phone number from SMS Messaging
@@ -191,7 +193,9 @@ paths:
       parameters:
       - $ref: '#/components/parameters/phone_number'
       tags:
-      - phone_numbers
+      - Phone Numbers
+      operationId: deletePhoneNumbersByPhoneNumber
+      x-operation-id-source: derived
     get:
       summary: Gets detailed phone number SMS Messaging metadata
       responses:
@@ -262,7 +266,9 @@ paths:
       parameters:
       - $ref: '#/components/parameters/phone_number'
       tags:
-      - phone_numbers
+      - Phone Numbers
+      operationId: getPhoneNumbersByPhoneNumber
+      x-operation-id-source: derived
     post:
       summary: Adds a phone number to involve with SMS Messaging
       responses:
@@ -340,7 +346,9 @@ paths:
       parameters:
       - $ref: '#/components/parameters/phone_number'
       tags:
-      - phone_numbers
+      - Phone Numbers
+      operationId: postPhoneNumbersByPhoneNumber
+      x-operation-id-source: derived
 components:
   parameters:
     phone_number:

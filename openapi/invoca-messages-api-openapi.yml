@@ -5,7 +5,7 @@ info:
   description: Messages
 servers: []
 tags:
-- name: messages
+- name: Messages
   description: Messages
 paths:
   /messages:
@@ -131,7 +131,9 @@ paths:
                     type: array
           description: returns a list of records sorted in desc created_at order
       tags:
-      - messages
+      - Messages
+      operationId: getMessages
+      x-operation-id-source: derived
     post:
       requestBody:
         content:
@@ -278,7 +280,9 @@ paths:
                     type: string
           description: is expected to be bad request
       tags:
-      - messages
+      - Messages
+      operationId: postMessages
+      x-operation-id-source: derived
   /messages/phone_number/{phone_number}:
     get:
       summary: Gets messages by phone number
@@ -394,7 +398,9 @@ paths:
       parameters:
       - $ref: '#/components/parameters/phone_number'
       tags:
-      - messages
+      - Messages
+      operationId: getMessagesPhoneNumberByPhoneNumber
+      x-operation-id-source: derived
   /messages/phone_number/{phone_number}/usage:
     get:
       summary: Gets message usage information by phone number
@@ -448,7 +454,9 @@ paths:
       parameters:
       - $ref: '#/components/parameters/phone_number'
       tags:
-      - messages
+      - Messages
+      operationId: getMessagesPhoneNumberByPhoneNumberUsage
+      x-operation-id-source: derived
   /messages/uuid/{message_uuid}:
     delete:
       summary: Deletes a message by message id
@@ -519,7 +527,9 @@ paths:
       parameters:
       - $ref: '#/components/parameters/message_uuid'
       tags:
-      - messages
+      - Messages
+      operationId: deleteMessagesUuidByMessageUuid
+      x-operation-id-source: derived
     get:
       summary: Gets a message given its message id
       responses:
@@ -601,7 +611,9 @@ paths:
       parameters:
       - $ref: '#/components/parameters/message_uuid'
       tags:
-      - messages
+      - Messages
+      operationId: getMessagesUuidByMessageUuid
+      x-operation-id-source: derived
   /messages/uuid/{message_uuid}/delivery_reports:
     get:
       summary: Gets delivery reports for a given message id
@@ -739,7 +751,9 @@ paths:
       parameters:
       - $ref: '#/components/parameters/message_uuid'
       tags:
-      - messages
+      - Messages
+      operationId: getMessagesUuidByMessageUuidDeliveryReports
+      x-operation-id-source: derived
   /messages/uuid/{message_uuid}/delivery_reports/uuid/{delivery_report_uuid}:
     get:
       summary: Gets messages by message id and delivery report id
@@ -790,33 +804,10 @@ paths:
       - $ref: '#/components/parameters/message_uuid'
       - $ref: '#/components/parameters/delivery_report_uuid'
       tags:
-      - messages
+      - Messages
+      operationId: getMessagesUuidByMessageUuidDeliveryReportsUuidByDeliveryReportUuid
+      x-operation-id-source: derived
 components:
-  parameters:
-    phone_number:
-      schema:
-        type: string
-      description: The Phone Number in E.164 Format
-      in: path
-      required: true
-      example: '+18885550100'
-      name: phone_number
-    message_uuid:
-      schema:
-        type: string
-      description: The Message UUID
-      in: path
-      required: true
-      example: da8ec5c7-bd73-4b35-9afb-b56050fd6568
-      name: message_uuid
-    delivery_report_uuid:
-      schema:
-        type: string
-      description: The Delivery Report UUID
-      in: path
-      required: true
-      example: 1162b7e8-e7b1-493b-b8c4-0bc838161c5f
-      name: delivery_report_uuid
   schemas:
     MessageRequest:
       type: object
@@ -829,3 +820,28 @@ components:
           type: string
         text:
           type: string
+  parameters:
+    message_uuid:
+      schema:
+        type: string
+      description: The Message UUID
+      in: path
+      required: true
+      example: da8ec5c7-bd73-4b35-9afb-b56050fd6568
+      name: message_uuid
+    phone_number:
+      schema:
+        type: string
+      description: The Phone Number in E.164 Format
+      in: path
+      required: true
+      example: '+18885550100'
+      name: phone_number
+    delivery_report_uuid:
+      schema:
+        type: string
+      description: The Delivery Report UUID
+      in: path
+      required: true
+      example: 1162b7e8-e7b1-493b-b8c4-0bc838161c5f
+      name: delivery_report_uuid
