@@ -808,18 +808,6 @@ paths:
       operationId: getMessagesUuidByMessageUuidDeliveryReportsUuidByDeliveryReportUuid
       x-operation-id-source: derived
 components:
-  schemas:
-    MessageRequest:
-      type: object
-      properties:
-        to:
-          items:
-            type: string
-          type: array
-        from:
-          type: string
-        text:
-          type: string
   parameters:
     message_uuid:
       schema:
@@ -845,3 +833,15 @@ components:
       required: true
       example: 1162b7e8-e7b1-493b-b8c4-0bc838161c5f
       name: delivery_report_uuid
+  schemas:
+    MessageRequest:
+      type: object
+      properties:
+        to:
+          items:
+            type: string
+          type: array
+        from:
+          type: string
+        text:
+          type: string
