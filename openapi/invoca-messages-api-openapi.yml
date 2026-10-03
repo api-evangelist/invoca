@@ -809,22 +809,6 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    message_uuid:
-      schema:
-        type: string
-      description: The Message UUID
-      in: path
-      required: true
-      example: da8ec5c7-bd73-4b35-9afb-b56050fd6568
-      name: message_uuid
-    phone_number:
-      schema:
-        type: string
-      description: The Phone Number in E.164 Format
-      in: path
-      required: true
-      example: '+18885550100'
-      name: phone_number
     delivery_report_uuid:
       schema:
         type: string
@@ -833,6 +817,22 @@ components:
       required: true
       example: 1162b7e8-e7b1-493b-b8c4-0bc838161c5f
       name: delivery_report_uuid
+    phone_number:
+      schema:
+        type: string
+      description: The Phone Number in E.164 Format
+      in: path
+      required: true
+      example: '+18885550100'
+      name: phone_number
+    message_uuid:
+      schema:
+        type: string
+      description: The Message UUID
+      in: path
+      required: true
+      example: da8ec5c7-bd73-4b35-9afb-b56050fd6568
+      name: message_uuid
   schemas:
     MessageRequest:
       type: object
