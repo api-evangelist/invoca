@@ -102,3 +102,28 @@ related:
 - billing_policy: https://www.invoca.com/billing-policy
 - basic_platform_features: https://www.invoca.com/basic-platform-features
 - elite_platform_features: https://www.invoca.com/elite-platform-features
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  units: []
+  plans:
+  - name: Pro
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Elite
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
