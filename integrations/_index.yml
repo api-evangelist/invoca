@@ -90,3 +90,16 @@
     detected: '2026-10-18'
   status: not-a-workflow
   arazzo: null
+- slug: invoca-genesys-own
+  label: Genesys (own)
+  partner: genesys
+  partner_name: Genesys (own)
+  category: businessOptimization|channelsAndRouting
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appfoundry.genesys.com/filter/genesyscloud/listing/83134e7a-fc70-43ea-a3bc-5be0bedb89f8
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
