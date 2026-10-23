@@ -128,32 +128,6 @@
     detected: '2026-10-21'
   status: not-a-workflow
   arazzo: null
-- slug: invoca-genesys-own
-  label: Genesys (own)
-  partner: genesys
-  partner_name: Genesys (own)
-  category: businessOptimization|channelsAndRouting
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://appfoundry.genesys.com/filter/genesyscloud/listing/83134e7a-fc70-43ea-a3bc-5be0bedb89f8
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: invoca-salesforce-own
-  label: Salesforce (own)
-  partner: salesforce
-  partner_name: Salesforce (own)
-  category: sales
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3000000B5MueEAF
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: invoca-amazon-ads-partner-directory-technology
   label: Amazon Ads (partner directory, technology)
   partner: amazon
@@ -195,5 +169,44 @@
       Ads LEARNING certifications held by staff, not product conformance, never certified_products
     detected_by: sweep-amazon-sp-api-appstore.py
     detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: invoca-genesys-own
+  label: Genesys (own)
+  partner: genesys
+  partner_name: Genesys (own)
+  category: businessOptimization|channelsAndRouting
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appfoundry.genesys.com/filter/genesyscloud/listing/83134e7a-fc70-43ea-a3bc-5be0bedb89f8
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: invoca-salesforce-own
+  label: Salesforce (own)
+  partner: salesforce
+  partner_name: Salesforce (own)
+  category: sales
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3000000B5MueEAF
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: invoca-adobe-analytics-own
+  label: Adobe Analytics (own)
+  partner: adobe-analytics
+  partner_name: Adobe Analytics (own)
+  category: Adobe Exchange Experience Cloud listing (Analytics)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/100067
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null

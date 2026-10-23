@@ -123,46 +123,6 @@ edges:
     detected: '2026-10-21'
   detected_by: sweep-salesforce-appexchange.py
   first_seen: '2026-10-21'
-- partner_name: Genesys (own)
-  partner: genesys
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://appfoundry.genesys.com/filter/genesyscloud/listing/83134e7a-fc70-43ea-a3bc-5be0bedb89f8
-  mirror_of: genesys/integrations/genesys-integration-edges.yml
-  apps:
-  - 'Invoca PreSense '
-  listing_count: 1
-  detected: '2026-10-19'
-  detected_by: mirror-platform-listings.py
-  category: businessOptimization|channelsAndRouting
-  publisher_verified:
-  - attestation:gdpr
-  - attestation:hipaa
-  - attestation:iso
-  - attestation:pci
-  - attestation:soc2
-- partner_name: Salesforce (own)
-  partner: salesforce
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3000000B5MueEAF
-  mirror_of: salesforce/integrations/salesforce-integration-edges.yml
-  apps:
-  - Invoca for Salesforce Sales Cloud
-  listing_count: 1
-  detected: '2026-10-21'
-  detected_by: mirror-platform-listings.py
-  category: sales
 - partner_name: Amazon Ads (partner directory, technology)
   partner: amazon
   partner_match: mirror
@@ -211,6 +171,63 @@ edges:
   detected_by: sweep-amazon-sp-api-appstore.py
   partner_tier:
   - PARTNER
+- partner_name: Genesys (own)
+  partner: genesys
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appfoundry.genesys.com/filter/genesyscloud/listing/83134e7a-fc70-43ea-a3bc-5be0bedb89f8
+  mirror_of: genesys/integrations/genesys-integration-edges.yml
+  apps:
+  - 'Invoca PreSense '
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: businessOptimization|channelsAndRouting
+  publisher_verified:
+  - attestation:gdpr
+  - attestation:hipaa
+  - attestation:iso
+  - attestation:pci
+  - attestation:soc2
+- partner_name: Salesforce (own)
+  partner: salesforce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3000000B5MueEAF
+  mirror_of: salesforce/integrations/salesforce-integration-edges.yml
+  apps:
+  - Invoca for Salesforce Sales Cloud
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: sales
+- partner_name: Adobe Analytics (own)
+  partner: adobe-analytics
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://exchange.adobe.com/apps/ec/100067
+  mirror_of: adobe-analytics/integrations/adobe-analytics-integration-edges.yml
+  apps:
+  - Invoca
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Adobe Exchange Experience Cloud listing (Analytics)
 method: searched
 checked:
 - genesys/integrations/genesys-integration-edges.yml
@@ -232,5 +249,6 @@ checked:
 - https://advertising.amazon.com/partners/directory
 - https://sellercentral.amazon.com/gspn
 - https://sellercentral.amazon.com/selling-partner-appstore
+- adobe-analytics/integrations/adobe-analytics-integration-edges.yml
 source:
 - https://github.com/meltano/hub
